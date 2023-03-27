@@ -1,3 +1,21 @@
-const Hello = () => <h1>Hello from React!</h1>;
+import Navbar from './Navbar';
+import Home from './Home';
+import Login from './Login';
+import '../app.css';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
-export default Hello;
+function App() {
+  return (
+    <BrowserRouter>
+      <div>
+        <Navbar />
+        <Routes>
+           <Route path="/" element={ <Home />} />
+           <Route path="/login" element={ <Login />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
+}
+
+export default App;
