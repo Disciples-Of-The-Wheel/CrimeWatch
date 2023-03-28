@@ -9,6 +9,7 @@ const authRoute = require('./routes/auth');
 
 const app = express();
 
+app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'build')));
 app.use('/api/reports', Reports);
 app.use(cookieSession(
