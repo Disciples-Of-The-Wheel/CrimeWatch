@@ -1,17 +1,45 @@
 import Navbar from './Navbar';
-import Home from './Home';
+import Dashboard from './Dashboard';
 import Login from './Login';
 import '../app.css';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
 
 function App() {
+
+  const [user, setUser] = useState(null)
+
+useEffect(() => {
+  const getUser = async () => {
+    fetch('http://localhost:8080/auth/login/sucess', {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+      }
+    }).then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+      throw new Error('authentication failed');
+    }).then(resObject => {
+      setUser(resObject.user)
+    }).catch(err => {
+      console.error(err);
+    })
+  };
+  getUser();
+}, [])
+
   return (
     <BrowserRouter>
       <div>
-        <Navbar />
+        <Navbar user={user}/>
         <Routes>
-           <Route path="/" element={ <Home />} />
-           <Route path="/login" element={ <Login />} />
+           <Route path="/" element={ <Dashboard /> } /> 
+           <Route path="/login" element={user ? <Navigate to='/' /> : <Login />} />
         </Routes>
       </div>
     </BrowserRouter>
