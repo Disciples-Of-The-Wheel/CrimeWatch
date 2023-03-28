@@ -12,7 +12,7 @@
     "seed": "node server/db/seed.js",
     "dev": "concurrently -c 'bgYellow.bold,bgGreen.bold' 'npm run start' 'npm run webpack'",
     "pull": "git pull origin main",
-    "deploy": "npm run pull && npm install && npm run dev"
+    "deploy": "npm run pull && npm install && npm run build && npm run prod"
   },
   "repository": {
     "type": "git",
