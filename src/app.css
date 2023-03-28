@@ -18,3 +18,42 @@
   font-weight: 500;
   cursor: pointer;
 }
+
+.login {
+  height: calc(100vh - 50px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  width: 60%;
+  height: 75%;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginButton {
+  width: 150px;
+  padding: 15px 25px;
+  border-radius: 5px;
+  color: white;
+}
+
+.google {
+  background-color: #df4930;
+}
+
+.link {
+  color: inherit;
+  text-decoration: none;
+}
+
