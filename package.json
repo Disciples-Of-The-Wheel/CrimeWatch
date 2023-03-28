@@ -10,7 +10,9 @@
     "start": "nodemon server/index.js",
     "prod": "node server/index.js",
     "seed": "node server/db/seed.js",
-    "dev": "concurrently -c 'bgYellow.bold,bgGreen.bold' 'npm run start' 'npm run build'"
+    "dev": "concurrently -c 'bgYellow.bold,bgGreen.bold' 'npm run start' 'npm run build'",
+    "pull": "git pull origin main",
+    "deploy": "npm run pull && npm install && npm run dev"
   },
   "repository": {
     "type": "git",
