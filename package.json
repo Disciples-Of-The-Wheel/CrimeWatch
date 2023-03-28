@@ -10,21 +10,21 @@
     "start": "nodemon server/index.js",
     "prod": "node server/index.js",
     "seed": "node server/db/seed.js",
-    "dev": "concurrently -c 'bgYellow.bold,bgGreen.bold' 'npm run start' 'npm run build'",
+    "dev": "concurrently -c 'bgYellow.bold,bgGreen.bold' 'npm run start' 'npm run webpack'",
     "pull": "git pull origin main",
     "deploy": "npm run pull && npm install && npm run dev"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mgandolfi7/CrimeWatch.git"
+    "url": "git+https://github.com/Disciples-Of-The-Wheel/CrimeWatch.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mgandolfi7/CrimeWatch/issues"
+    "url": "https://github.com/Disciples-Of-The-Wheel/CrimeWatch/issues"
   },
-  "homepage": "https://github.com/mgandolfi7/CrimeWatch#readme",
+  "homepage": "https://github.com/Disciples-Of-The-Wheel/CrimeWatch#readme",
   "devDependencies": {
     "@babel/core": "^7.21.3",
     "@babel/preset-env": "^7.20.2",
