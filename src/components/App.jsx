@@ -39,7 +39,7 @@ useEffect(() => {
         <Navbar user={user}/>
         <Routes>
            <Route path="/" element={ <Login /> } /> 
-           <Route path="/dashboard" element={ user.length != 0 ?  <Dashboard /> : <Navigate to="/" />} />
+           <Route path="/dashboard" element={ user ?  <Navigate to="/" />  :  <Dashboard /> } />
         </Routes>
       </div>
     </BrowserRouter>
