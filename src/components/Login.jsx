@@ -1,7 +1,7 @@
 const Login = () => {
 
   const google = () => {
-    window.open('http://localhost:8080/auth/google', '_self')
+    window.open('http://ec2-3-135-195-99.us-east-2.compute.amazonaws.com:8080/auth/google/callback', '_self')
   }
   return (
     <div className="login">

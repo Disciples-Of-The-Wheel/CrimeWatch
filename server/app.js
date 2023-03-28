@@ -22,7 +22,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cors({
-  origin: 'http://localhost:8080',
+  origin: 'http://ec2-3-135-195-99.us-east-2.compute.amazonaws.com:8080',
   methods: 'GET,POST,PUT,DELETE',
   credentials: true,
 }));

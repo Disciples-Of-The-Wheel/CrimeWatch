@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const passport = require("passport");
 
-const CLIENT_URL = "http://localhost:8080/";
+const CLIENT_URL = "http://ec2-3-135-195-99.us-east-2.compute.amazonaws.com:8080";
 
 router.get("/login/success", (req, res) => {
   if (req.user) {
