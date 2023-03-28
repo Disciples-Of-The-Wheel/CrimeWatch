@@ -38,8 +38,8 @@ useEffect(() => {
       <div>
         <Navbar user={user}/>
         <Routes>
-           <Route path="/" element={ user ? <Dashboard /> : <Login /> } /> 
-           <Route path="/login" element={ user ? <Navigate to="/" /> : <Login />} />
+           <Route path="/" element={ <Login /> } /> 
+           <Route path="/dashboard" element={ user ? <Dashboard /> : <Navigate to="/" />} />
         </Routes>
       </div>
     </BrowserRouter>
