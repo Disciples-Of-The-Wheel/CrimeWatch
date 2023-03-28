@@ -11,7 +11,7 @@ function App() {
 
 useEffect(() => {
   const getUser = async () => {
-    fetch('http://localhost:8080/auth/login/sucess', {
+    fetch('http://ec2-3-135-195-99.us-east-2.compute.amazonaws.com:8080/auth/login/sucess', {
       method: "GET",
       credentials: "include",
       headers: {
