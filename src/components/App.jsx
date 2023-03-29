@@ -9,41 +9,56 @@ function App() {
 
   const [user, setUser] = useState(null)
 
-useEffect(() => {
-  const getUser = async () => {
-    fetch('http://ec2-3-135-195-99.us-east-2.compute.amazonaws.com:8080/auth/login/sucess', {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true,
-      }
-    }).then(res => {
-      if (res.status === 200) {
-        return res.json();
-      }
-      throw new Error('authentication failed');
-    }).then(resObject => {
-      setUser(resObject.user)
-    }).catch(err => {
-      console.error(err);
-    })
-  };
-  getUser();
-}, [])
+  useEffect(() => {
+    const getUser = () => {
+      fetch("/auth/login/success", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+        .then((response) => {
+          if (response.status === 200) return response.json();
+          throw new Error("authentication has been failed!");
+        })
+        .then((resObject) => {
+          setUser(resObject.user);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getUser();
+  }, []);
 
   return (
     <BrowserRouter>
       <div>
         <Navbar user={user}/>
         <Routes>
-           <Route path="/" element={ user ? <Navigate to="/dashboard" /> : <Login /> } /> 
-           <Route path="/dashboard" element={ user ? <Dashboard /> : <Navigate to="/" /> } />
+           <Route path="/" element={ user ?  <Dashboard /> : <Navigate to="/login" />} /> 
+           <Route path="/login" element={ user ? <Navigate to="/" /> : <Login />} />
         </Routes>
       </div>
     </BrowserRouter>
   );
 }
+
+// return (
+//   <BrowserRouter>
+//     <div>
+//       <Navbar user={user}/>
+//       <Routes>
+//          <Route path="/" element={ user ?  <Navigate to="/dashboard" /> : <Login />} /> 
+//          <Route path="/dashboard" element={ user ? <Dashboard /> : <Navigate to="/" /> } />
+//          {console.log(user, 'test')}
+//       </Routes>
+//     </div>
+//   </BrowserRouter>
+// );
+// }
 
 export default App;
