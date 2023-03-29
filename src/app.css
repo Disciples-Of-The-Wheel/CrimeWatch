@@ -57,3 +57,17 @@
   text-decoration: none;
 }
 
+.form {
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  margin-top: 20px;
+}
+
+.container {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
