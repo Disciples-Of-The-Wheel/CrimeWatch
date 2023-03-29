@@ -47,18 +47,4 @@ function App() {
   );
 }
 
-// return (
-//   <BrowserRouter>
-//     <div>
-//       <Navbar user={user}/>
-//       <Routes>
-//          <Route path="/" element={ user ?  <Navigate to="/dashboard" /> : <Login />} /> 
-//          <Route path="/dashboard" element={ user ? <Dashboard /> : <Navigate to="/" /> } />
-//          {console.log(user, 'test')}
-//       </Routes>
-//     </div>
-//   </BrowserRouter>
-// );
-// }
-
 export default App;
