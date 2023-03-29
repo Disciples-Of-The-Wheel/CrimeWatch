@@ -8,8 +8,6 @@ function Navbar({user}) {
          <Link className="link" to="/">CrimeWatch</Link>
       </span> {
         user ? (
-      
-
       <ul className="list">
         <li className="listItem">Michael G</li>
         <li className="listItem">Logout</li>

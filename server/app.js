@@ -6,6 +6,8 @@ const passportSetup = require('./passport');
 const { Reports } = require('./routes/reports');
 const passport = require('passport');
 const authRoute = require('./routes/auth');
+require('dotenv').config();
+
 
 const app = express();
 
@@ -23,7 +25,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cors({
-  origin: 'http://ec2-3-135-195-99.us-east-2.compute.amazonaws.com:8080',
+  origin: '/',
   methods: 'GET,POST,PUT,DELETE',
   credentials: true,
 }));

@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const passport = require("passport");
 
-const CLIENT_URL = "http://ec2-3-135-195-99.us-east-2.compute.amazonaws.com:8080";
+const CLIENT_URL = "/";
 
 router.get("/login/success", (req, res) => {
   if (req.user) {
@@ -9,7 +9,6 @@ router.get("/login/success", (req, res) => {
       success: true,
       message: "successfull",
       user: req.user,
-      //   cookies: req.cookies
     });
   }
 });
@@ -33,7 +32,7 @@ router.get(
   passport.authenticate("google", {
     successRedirect: CLIENT_URL,
     failureRedirect: "/login/failed",
-  })
+  }),
 );
 
 module.exports = router;
