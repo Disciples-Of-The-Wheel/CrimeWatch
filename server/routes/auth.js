@@ -9,7 +9,6 @@ router.get("/login/success", (req, res) => {
       success: true,
       message: "successfull",
       user: req.user,
-      //   cookies: req.cookies
     });
   }
 });
@@ -33,7 +32,7 @@ router.get(
   passport.authenticate("google", {
     successRedirect: CLIENT_URL,
     failureRedirect: "/login/failed",
-  })
+  }),
 );
 
 module.exports = router;
