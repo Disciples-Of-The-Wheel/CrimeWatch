@@ -61,6 +61,7 @@
     "react-router-dom": "^6.9.0",
     "react-scripts": "^5.0.1",
     "sequelize": "^6.30.0",
-    "style-loader": "^3.3.2"
+    "style-loader": "^3.3.2",
+    "worker-loader": "^3.0.8"
   }
 }
