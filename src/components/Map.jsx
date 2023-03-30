@@ -31,18 +31,14 @@ export default function Map({ reports, zipcode }) {
     if (reports === []) {
       return;
     } else {
-      for (let i = 0; i < reports.data.length; i++) {
-        new mapboxgl.Marker()
-        .setLngLat([reports.data[i].location.coordinates[0], reports.data[i].location.coordinates[1]])
-        .addTo(map.current);
+      if (reports && reports.data) {
+        for (let i = 0; i < reports.data.length; i++) {
+          new mapboxgl.Marker()
+            .setLngLat([reports.data[i].location.coordinates[0], reports.data[i].location.coordinates[1]])
+            .addTo(map.current);
+        }
       }
-    }
-    })
-
-  // useEffect(() => {
-  //   console.log('zip', zipcode)
-  // })
-
+    }})
   return (
   <div>
   <div ref={mapContainer} className="map-container" />
