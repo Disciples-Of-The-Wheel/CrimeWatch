@@ -68,11 +68,11 @@ input {
   margin-top: 20px;
 }
 
-.container {
+/* .container {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-}
+} */
 
 .map-container {
   height: 400px;
@@ -91,20 +91,152 @@ input {
   border-radius: 4px;
 }
 
+
 /*
 TIMELINE
 */
 
-.timeline {
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  width: 100%;
+}
+
+.timeline-container {
   display: flex;
   flex-direction: column;
+  position: relative;
   margin: 40px 0;
 }
 
-.timeline::after {
+.timeline-container::after {
   background-color: #e17b77;
   content: '';
   position: absolute;
+  left: calc(50% - 2px);
   width: 4px;
   height: 100%;
+}
+
+.timeline-item {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 30px;
+  margin: 10px 0;
+  width: 50%;
+}
+
+.timeline-item:nth-child(odd) {
+  align-self: flex-end;
+  justify-content: flex-start;
+  padding-right: 0px;
+  padding-left: 30px;
+}
+
+.timeline-item-content {
+  background-color: rgb(179, 232, 235);
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: relative;
+  padding: 15px;
+  max-width: 70%;
+  width: 400px;
+  text-align: right;
+}
+
+.timeline-item-content::after {
+  content: '';
+  background-color: rgb(179, 232, 235);
+  box-shadow: 1px -1px 1px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  transform: rotate(45deg);
+  right: -7.5px;
+  top: calc(50% - 7.5px);
+  width: 15px;
+  height: 15px;
+}
+
+.timeline-item:nth-child(odd) .timeline-item-content {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.timeline-item:nth-child(odd) .timeline-item-content::after {
+  box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.2);
+  right: auto;
+  left: -7.5px;
+}
+
+.timeline-item-content .type-text {
+  font-size: 12px;
+  font-weight: bold;
+  padding: 5px;
+  position: absolute;
+  letter-spacing: 1px;
+  top: 5px;
+  left: 5px;
+  text-transform: uppercase;
+}
+
+.timeline-item:nth-child(odd) .timeline-item-content .type-text {
+  left: auto;
+  right: 5px;
+}
+
+.timeline-item-content .time-create {
+  color: #8a5351;
+  font-size: 12px;
+}
+
+.timeline-item-content .timeline-zip .disposition {
+
+}
+
+/*  old timeline css */
+
+.tmln-table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #ffffff;
+  text-align: left;
+  padding: 8px;
+  font-size: 32px;
+}
+
+th {
+  background-color: rgb(117, 201, 250);
+}
+
+td {
+  background-color: rgb(205, 235, 253);
+}
+
+form {
+  display: flex;
+  gap: 5px;
+}
+
+form td:last-child {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+form * {
+  font-size: 28px;
 }
