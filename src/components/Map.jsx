@@ -1,13 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl-csp';
 import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker'; // Load worker code separately with worker-loader
-
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 require('dotenv').config();
 
 mapboxgl.accessToken = process.env.MAPBOXGL;
 
-mapboxgl.workerClass = MapboxWorker; // Wire up loaded worker to be used instead of the default
 
  
 export default function Map({ reports, zipcode }) {
