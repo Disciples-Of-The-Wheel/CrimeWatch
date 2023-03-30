@@ -14,15 +14,15 @@ export default function Map({ reports, zipcode }) {
   const [lng, setLng] = useState(-90.0715);
   const [lat, setLat] = useState(29.9511);
   const [zoom, setZoom] = useState(9);
-   
+
   useEffect(() => {
-  if (map.current) return; // initialize map only once
-  map.current = new mapboxgl.Map({
-  container: mapContainer.current,
-  style: 'mapbox://styles/mapbox/streets-v12',
-  center: [lng, lat],
-  zoom: zoom
-  });
+    if (map.current) return; // initialize map only once
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: 'mapbox://styles/mapbox/streets-v12',
+      center: [lng, lat],
+      zoom: zoom
+    });
   });
 
   useEffect(() => {
@@ -40,8 +40,8 @@ export default function Map({ reports, zipcode }) {
       }
     }})
   return (
-  <div>
-  <div ref={mapContainer} className="map-container" />
-  </div>
+    <div>
+      <div ref={mapContainer} className="map-container" />
+    </div>
   );
-  }
+}
