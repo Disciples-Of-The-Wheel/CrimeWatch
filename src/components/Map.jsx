@@ -38,13 +38,7 @@ export default function Map({ reports, zipcode }) {
             .addTo(map.current);
         }
       }
-    }
-  })
-
-  // useEffect(() => {
-  //   console.log('zip', zipcode)
-  // })
-
+    }})
   return (
     <div>
       <div ref={mapContainer} className="map-container" />
