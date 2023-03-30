@@ -41,7 +41,7 @@ const Dashboard = () => {
       </div>
       <Map reports={reports}/>
       <Timeline />
-      <Charts />
+      <Charts reports={reports} />
       <Form />
     </div>
   )
