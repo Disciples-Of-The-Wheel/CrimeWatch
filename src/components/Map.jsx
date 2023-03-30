@@ -1,18 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
-import mapboxgl from 'mapbox-gl/dist/mapbox-gl-csp';
-import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker'; // Load worker code separately with worker-loader
-mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
-
+import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 require('dotenv').config();
 
-mapboxgl.accessToken = process.env.MAPBOXGL;
+mapboxgl.accessToken = 'pk.eyJ1IjoibWdhbmRvbGZpIiwiYSI6ImNsZnUxcHFqNTAxeWczanF6anpldzV5bjUifQ.HJC-KdFh37GWmawwe0Sx1A';
 
-<<<<<<< HEAD
-  // console.log('from map', reports)
-=======
->>>>>>> 800764dc88d5c69c308d5e2d89e45eff058a7962
-
- 
 export default function Map({ reports, zipcode }) {
   const mapContainer = useRef(null);
   const map = useRef(null);

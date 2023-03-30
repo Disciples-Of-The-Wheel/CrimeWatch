@@ -10,12 +10,8 @@ const axios = require('axios');
 
 const Dashboard = () => {
 
-<<<<<<< HEAD
-  const [reports, setReports] = useState([])
-=======
   const [reports, setReports] = useState(null)
   const [zipcode, setZipcode] = useState(null)
->>>>>>> 800764dc88d5c69c308d5e2d89e45eff058a7962
 
 
   function getReports(event) {
@@ -47,13 +43,8 @@ const Dashboard = () => {
         <input type="submit" onClick={getReports} />
       </form>
       </div>
-<<<<<<< HEAD
-      <Map reports={reports}/>
-      <Timeline reports={reports} />
-=======
       <Map reports={reports} zipcode={zipcode}/>
-      <Timeline />
->>>>>>> 800764dc88d5c69c308d5e2d89e45eff058a7962
+      <Timeline reports={reports}/>
       <Charts />
       <Form />
     </div>
