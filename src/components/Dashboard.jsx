@@ -9,7 +9,7 @@ const axios = require('axios');
 
 const Dashboard = () => {
 
-  const [reports, setReports] = useState(null)
+  const [reports, setReports] = useState([])
   const [zipcode, setZipcode] = useState(null)
 
 
