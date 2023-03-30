@@ -18,7 +18,12 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: {
+          loader: 'babel-loader',
+          options: {
+            ignore: ['./node_modules/mapbox-gl/dist/mapbox-gl.js'],
+          },
+        },
       },
       {
         test: /\.css$/,

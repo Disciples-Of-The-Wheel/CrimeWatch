@@ -4,6 +4,7 @@ import Login from './Login';
 import '../app.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
+// import Worker from "worker-loader!./Worker.js";
 
 function App() {
 
