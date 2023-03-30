@@ -29,6 +29,10 @@ const Dashboard = () => {
     setZipcode(event.target.value)
   }
 
+  //   useEffect(() => {
+  //   console.log("reports updated:", reports);
+  // }, [reports]);
+
   return (
     <div className='container'>
       <div className='form'>
@@ -39,8 +43,8 @@ const Dashboard = () => {
       </form>
       </div>
       <Map reports={reports} zipcode={zipcode}/>
-      <Timeline />
-      <Charts reports={reports} />
+      <Timeline reports={reports}/>
+      <Charts />
       <Form />
     </div>
   )

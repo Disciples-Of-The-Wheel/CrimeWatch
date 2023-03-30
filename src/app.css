@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+
 .navbar {
   height: 50px;
   background-color: blue;
@@ -87,4 +89,22 @@ input {
   left: 0;
   margin: 12px;
   border-radius: 4px;
+}
+
+/*
+TIMELINE
+*/
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  margin: 40px 0;
+}
+
+.timeline::after {
+  background-color: #e17b77;
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 100%;
 }
