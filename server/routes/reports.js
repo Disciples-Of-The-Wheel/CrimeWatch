@@ -1,10 +1,10 @@
 const { Router } = require('express');
-const { Report } = require('../db');
+const { IncidentReport } = require('../db');
 
-const Reports = Router();
+const IncidentReports = Router();
 
-Reports.get('/', (req, res) => {
-  Report.findAll()
+IncidentReports.get('/', (req, res) => {
+  IncidentReport.findAll()
     .then((reports) => {
       res.status(200);
       res.send(reports);
@@ -14,10 +14,10 @@ Reports.get('/', (req, res) => {
     });
 });
 
-Reports.post('/', (req, res) => {
+IncidentReports.post('/', (req, res) => {
   const { report } = req.body;
 
-  Report.create(report)
+  IncidentReport.create(report)
     .then((data) => {
       res.status(201).send(data);
     })
@@ -27,5 +27,5 @@ Reports.post('/', (req, res) => {
 });
 
 module.exports = {
-  Reports,
+  IncidentReports,
 };

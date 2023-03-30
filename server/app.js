@@ -3,7 +3,7 @@ const cookieSession = require('cookie-session');
 const path = require('path');
 const cors = require('cors');
 const passportSetup = require('./passport');
-const { Reports } = require('./routes/reports');
+const { IncidentReports } = require('./routes/reports');
 const passport = require('passport');
 const authRoute = require('./routes/auth');
 // require('dotenv').config();
@@ -13,7 +13,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'build')));
-app.use('/api/reports', Reports);
+app.use('/api/reports', IncidentReports);
 app.use(cookieSession(
   {
     name: 'session',
