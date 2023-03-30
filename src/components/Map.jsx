@@ -1,20 +1,56 @@
 import React, { useRef, useEffect, useState } from 'react';
-import mapboxgl from 'mapbox-gl';
-
-// eslint-disable-next-line import/no-webpack-loader-syntax
+import mapboxgl from 'mapbox-gl/dist/mapbox-gl-csp';
+import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker'; // Load worker code separately with worker-loader
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
-// mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
+require('dotenv').config();
 
-const Map = ({ reports }) => {
+mapboxgl.accessToken = process.env.MAPBOXGL;
 
+<<<<<<< HEAD
   // console.log('from map', reports)
+=======
+>>>>>>> 800764dc88d5c69c308d5e2d89e45eff058a7962
+
+ 
+export default function Map({ reports, zipcode }) {
+  const mapContainer = useRef(null);
+  const map = useRef(null);
+  const [lng, setLng] = useState(-90.0715);
+  const [lat, setLat] = useState(29.9511);
+  const [zoom, setZoom] = useState(9);
+   
+  useEffect(() => {
+  if (map.current) return; // initialize map only once
+  map.current = new mapboxgl.Map({
+  container: mapContainer.current,
+  style: 'mapbox://styles/mapbox/streets-v12',
+  center: [lng, lat],
+  zoom: zoom
+  });
+  });
+
+  useEffect(() => {
+    if (!map.current) return;
+
+    if (reports === null) {
+      return;
+    } else {
+      for (let i = 0; i < reports.data.length; i++) {
+        new mapboxgl.Marker()
+        .setLngLat([reports.data[i].location.coordinates[0], reports.data[i].location.coordinates[1]])
+        .addTo(map.current);
+      }
+    }
+    })
+
+  // useEffect(() => {
+  //   console.log('zip', zipcode)
+  // })
 
   return (
-    <div>
-      <h1>MAP</h1>
-    </div>
-  )
-}
-
-export default Map;
+  <div>
+  <div ref={mapContainer} className="map-container" />
+  </div>
+  );
+  }
