@@ -71,3 +71,21 @@ input {
   margin-left: auto;
   margin-right: auto;
 }
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.modal-buttons button {
+  flex-basis: 48%;
+}
