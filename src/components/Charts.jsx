@@ -1,9 +1,6 @@
-import { LineChart, Line, BarChart, Bar, PieChart, Pie, Sector, Cell, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
+import { LineChart, Line, BarChart, Bar, PieChart, Pie, Sector, Cell, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip, LabelList } from 'recharts';
 
 const Charts = ({ reports }) => {
-
-  const chartData = [{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 }, { name: 'Page B', uv: 300, pv: 1400, amt: 1400 }, { name: 'Page A', uv: 500, pv: 3000, amt: 3000 }];
-
 
   let dummyData = [{
     type: 'DOMESTIC VIOLENCE',
@@ -11,7 +8,7 @@ const Charts = ({ reports }) => {
     time: '2023-03-22T00:04:16.803',
     zip: 70119,
     description: 'DOMESTIC VIOLENCE',
-    alert: false, 
+    alert: false,
   },
   {
     type: 'SUSPICIOUS EVENT',
@@ -19,7 +16,7 @@ const Charts = ({ reports }) => {
     time: '2023-03-22T00:10:10.690',
     zip: 70126,
     description: 'SHOTS FIRED',
-    alert: false, 
+    alert: false,
   },
   {
     type: 'ALARM: COMMERCIAL - BURGLARY',
@@ -27,7 +24,7 @@ const Charts = ({ reports }) => {
     time: '2023-03-22T00:10:33.920',
     zip: 70131,
     description: 'ALARM: COMMERCIAL - BURGLARY',
-    alert: false, 
+    alert: false,
   },
   {
     type: 'SHOTS FIRED',
@@ -35,7 +32,7 @@ const Charts = ({ reports }) => {
     time: '2023-03-22T00:11:25.940',
     zip: 70126,
     description: 'SHOTS FIRED',
-    alert: false, 
+    alert: false,
   },
   {
     type: 'SUSPICIOUS EVENT',
@@ -43,7 +40,7 @@ const Charts = ({ reports }) => {
     time: '2023-03-22T00:10:10.690',
     zip: 70126,
     description: 'SHOTS FIRED',
-    alert: false, 
+    alert: false,
   },
   {
     type: 'DOMESTIC DISPUTE',
@@ -51,7 +48,7 @@ const Charts = ({ reports }) => {
     time: '2023-03-22T00:13:38.380',
     zip: 70115,
     description: 'DOMESTIC DISPUTE',
-    alert: false, 
+    alert: false,
   },
   {
     type: 'SUSPICIOUS EVENT',
@@ -59,7 +56,7 @@ const Charts = ({ reports }) => {
     time: '2023-03-22T00:10:10.690',
     zip: 70126,
     description: 'SHOTS FIRED',
-    alert: false, 
+    alert: false,
   },
   {
     type: 'NOISE VIOLATION',
@@ -67,7 +64,7 @@ const Charts = ({ reports }) => {
     time: '2023-03-22T00:14:29.433',
     zip: 70126,
     description: 'NOISE VIOLATION',
-    alert: false, 
+    alert: false,
   },
   {
     type: 'SHOTS FIRED',
@@ -75,7 +72,7 @@ const Charts = ({ reports }) => {
     time: '2023-03-22T00:15:24.740',
     zip: 70126,
     description: 'SHOTS FIRED',
-    alert: false, 
+    alert: false,
   },
   {
     type: 'SUSPICIOUS EVENT',
@@ -83,7 +80,7 @@ const Charts = ({ reports }) => {
     time: '2023-03-22T00:10:10.690',
     zip: 70126,
     description: 'SHOTS FIRED',
-    alert: false, 
+    alert: false,
   },
   {
     type: 'VEHICLE RECOVERY',
@@ -91,7 +88,7 @@ const Charts = ({ reports }) => {
     time: '2023-03-22T00:21:24.990',
     zip: 70114,
     description: 'ABANDONED VEHICLE',
-    alert: false, 
+    alert: false,
   },
   {
     type: 'DOMESTIC VIOLENCE',
@@ -99,10 +96,32 @@ const Charts = ({ reports }) => {
     time: '2023-03-22T00:23:15.440',
     zip: 70125,
     description: 'SIMPLE ASSAULT',
-    alert: false, 
+    alert: false,
   }];
-
   
+
+  let tally = {};
+
+  let pieChartData = [];
+
+  dummyData.forEach((ele) => {
+    if (tally[ele.type]) {
+      tally[ele.type]++;
+    } else {
+      tally[ele.type] = 1;
+    }
+  });
+
+  for (let key in tally) {
+    pieChartData.push({
+      name: key,
+      value: tally[key]
+    })
+  }
+
+  const pieViewBox = { x: 50, y: 50, width: 50, height: 50 };
+
+  const chartData = [{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 }, { name: 'Page B', uv: 300, pv: 1400, amt: 1400 }, { name: 'Page A', uv: 500, pv: 3000, amt: 3000 }];
 
   const data01 = [
     { name: 'Group A', value: 400 },
@@ -154,15 +173,29 @@ const Charts = ({ reports }) => {
     return null;
   }
 
+  function PieChartTooltip({ payload, label, active }) {
+    if (active) {
+      return (
+        <div className="custom-tooltip">
+          <p className="label">{`${label} : ${payload[0].value}`}</p>
+          <p className="intro">{getIntroOfPage(label)}</p>
+          <p className="desc">Anything you want can be displayed here.</p>
+        </div>
+      );
+    }
 
+    return null;
+  }
+
+  //center circle should be the city as a whole, outer circle should be the current zipcode data
   const renderPieChart = (
     <ResponsiveContainer width="100%" height="50%">
-    <PieChart width={200} height={200}>
-    <Tooltip />
-      <Pie data={data01} dataKey="value" cx="50%" cy="50%" outerRadius={60} fill="#8884d8" />
-      <Pie data={data02} dataKey="value" cx="50%" cy="50%" innerRadius={70} outerRadius={90} fill="#82ca9d" label />
-    </PieChart>
-  </ResponsiveContainer>
+      <PieChart width={200} height={200}>
+        <Tooltip content={<PieChartTooltip />} fill="#e39619" />
+        <Pie data={pieChartData} dataKey="value" cx="50%" cy="50%" outerRadius={120} fill="#1411bd" />
+        <Pie data={pieChartData} dataKey="value" cx="50%" cy="50%" innerRadius={140} outerRadius={180} fill="#cc1c0c" label />
+      </PieChart>
+    </ResponsiveContainer>
   )
 
   const renderLineChart = (
