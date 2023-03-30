@@ -8,7 +8,7 @@ mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 
 const Map = ({ reports }) => {
 
-  console.log('from map', reports)
+  // console.log('from map', reports)
 
   return (
     <div>

@@ -9,7 +9,7 @@ const axios = require('axios');
 
 const Dashboard = () => {
 
-  const [reports, setReports] = useState(null)
+  const [reports, setReports] = useState([])
 
   let zipcode = 0;
 
@@ -30,6 +30,10 @@ const Dashboard = () => {
     zipcode = event.target.value
   }
 
+  //   useEffect(() => {
+  //   console.log("reports updated:", reports);
+  // }, [reports]);
+
   return (
     <div className='container'>
       <div className='form'>
@@ -40,7 +44,7 @@ const Dashboard = () => {
       </form>
       </div>
       <Map reports={reports}/>
-      <Timeline />
+      <Timeline reports={reports} />
       <Charts />
       <Form />
     </div>
