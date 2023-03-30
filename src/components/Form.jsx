@@ -69,6 +69,11 @@ const Form = () => {
 <option value="type7">SIMPLE ASSAULT</option>
 <option value="type8">ACCIDENT - HIT & RUN</option>
 <option value="type9">ACCIDENT - PROPERTY DAMAGE</option>
+<option value="type10">THEFT</option>
+<option value="type11">SUSPICIOUS VEHICLE</option>
+<option value="type12">TRAFFIC STOP</option>
+<option value="type13">TRESPASSING</option>
+<option value="type12">THREATS/HARASSMENT</option>
         </select>
       </label>
       <label>
