@@ -7,7 +7,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useState } from "react";
 const axios = require('axios');
 
-
 const Dashboard = () => {
 
   const [reports, setReports] = useState(null)
