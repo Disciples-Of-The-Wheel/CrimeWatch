@@ -109,6 +109,8 @@ TIMELINE
   flex-direction: column;
   position: relative;
   margin: 40px 0;
+  height: 600px;
+  overflow-y: scroll;
 }
 
 .timeline-container::after {
@@ -117,7 +119,6 @@ TIMELINE
   position: absolute;
   left: calc(50% - 2px);
   width: 4px;
-  height: 100%;
 }
 
 .timeline-item {
