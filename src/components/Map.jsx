@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-require('dotenv').config();
+// require('dotenv').config();
 
 
 // eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
