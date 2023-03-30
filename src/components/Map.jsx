@@ -28,7 +28,7 @@ export default function Map({ reports, zipcode }) {
   useEffect(() => {
     if (!map.current) return;
 
-    if (reports === null) {
+    if (reports === []) {
       return;
     } else {
       for (let i = 0; i < reports.data.length; i++) {
