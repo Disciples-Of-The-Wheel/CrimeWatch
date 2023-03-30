@@ -90,7 +90,34 @@ input {
   margin: 12px;
   border-radius: 4px;
 }
+form {
+  display: flex;
+  flex-direction: column;
+}
 
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+/* FORM */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.modal-buttons button {
+  flex-basis: 48%;
+}
 /*
 TIMELINE
 */

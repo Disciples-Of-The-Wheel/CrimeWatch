@@ -1,6 +1,6 @@
-const { Report } = require('./index');
+const { IncidentReport } = require('./index');
 
 (async () => {
-  await Report.sync({ force: true });
-  console.log('Reports table created');
+  await IncidentReport.sync({ force: true });
+  console.log('IncidentReport table created');
 })();
