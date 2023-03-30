@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+
 .navbar {
   height: 50px;
   background-color: blue;
@@ -71,21 +73,38 @@ input {
   margin-left: auto;
   margin-right: auto;
 }
-form {
+
+.map-container {
+  height: 400px;
+  }
+   
+.sidebar {
+  background-color: rgba(35, 55, 75, 0.9);
+  color: #fff;
+  padding: 6px 12px;
+  font-family: monospace;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 12px;
+  border-radius: 4px;
+}
+
+/*
+TIMELINE
+*/
+
+.timeline {
   display: flex;
   flex-direction: column;
+  margin: 40px 0;
 }
 
-label {
-  display: block;
-  margin-bottom: 10px;
-}
-.modal-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-
-.modal-buttons button {
-  flex-basis: 48%;
+.timeline::after {
+  background-color: #e17b77;
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 100%;
 }

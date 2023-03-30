@@ -3,15 +3,15 @@ import Map from './Map';
 import Charts from './Charts';
 import Form from './Form';
 import '../app.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useState } from "react";
 const axios = require('axios');
 
-
 const Dashboard = () => {
 
-  const [reports, setReports] = useState(null)
+  const [reports, setReports] = useState([])
+  const [zipcode, setZipcode] = useState(null)
 
-  let zipcode = 0;
 
   function getReports(event) {
     event.preventDefault();
@@ -26,9 +26,12 @@ const Dashboard = () => {
   }
 
   function updateZip(event) {
-    // setZipcode(event.target.value)
-    zipcode = event.target.value
+    setZipcode(event.target.value)
   }
+
+  //   useEffect(() => {
+  //   console.log("reports updated:", reports);
+  // }, [reports]);
 
   return (
     <div className='container'>
@@ -39,8 +42,8 @@ const Dashboard = () => {
         <input type="submit" onClick={getReports} />
       </form>
       </div>
-      <Map reports={reports}/>
-      <Timeline />
+      <Map reports={reports} zipcode={zipcode}/>
+      <Timeline reports={reports}/>
       <Charts />
       <Form />
     </div>
