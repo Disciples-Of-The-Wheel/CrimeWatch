@@ -105,11 +105,12 @@ TIMELINE
 }
 
 .timeline-container {
+  background-color: white;
   display: flex;
   flex-direction: column;
   position: relative;
   margin: 40px 0;
-  height: 600px;
+  max-height: 600px;
   overflow-y: scroll;
 }
 
@@ -119,6 +120,7 @@ TIMELINE
   position: absolute;
   left: calc(50% - 2px);
   width: 4px;
+  height: 50000px;
 }
 
 .timeline-item {
@@ -194,7 +196,7 @@ TIMELINE
   font-size: 12px;
 } */
 
-.timeline-item-content .time-create .timeline-zip .disposition {
+.timeline-item-content .time-create .timeline-zip .disposition .block-address {
   font-size: 16px;
   line-height: 24px;
   margin: 15px 0;
@@ -220,36 +222,6 @@ TIMELINE
 
 
 
-
-
-/*  old timeline css */
-
-.tmln-table {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 1rem;
-}
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td {
-  border: 1px solid #ffffff;
-  text-align: left;
-  padding: 8px;
-  font-size: 32px;
-}
-
-th {
-  background-color: rgb(117, 201, 250);
-}
-
-td {
-  background-color: rgb(205, 235, 253);
-}
 
 form {
   display: flex;

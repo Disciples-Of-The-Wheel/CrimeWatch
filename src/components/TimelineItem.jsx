@@ -10,7 +10,8 @@ const TimelineItem = ({ report }) => {
         </span>
         {/* <time>{report.timecreate}</time> */}
         <p className="time-create">Time Reported: {report.timecreate}</p>
-        <p className="timeline-zip">Zip code: {report.zip}</p>
+        <p className='block-address'>Block Address: {report.block_address}</p>
+        <p className="timeline-zip">Zip: {report.zip}</p>
         <p className="disposition">Disposition: {report.dispositiontext}</p>
         <span className="circle"></span>
       </div>
