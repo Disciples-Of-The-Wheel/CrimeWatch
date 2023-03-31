@@ -3,11 +3,15 @@ import TimelineItem from "./TimelineItem";
 
 const Timeline = ({ reports }) => {
 
+  const sortedReports = reports.data?.sort((a, b) => {
+    return new Date(b.timecreate) - new Date(a.timecreate);
+  });
+
   return (
     <div className="timeline">
       <h1>NOPD Use of Force Timeline</h1>
       <div className="timeline-container">
-        {reports.data?.map((report) => {
+        {sortedReports?.map((report) => {
           return <TimelineItem report={report}/>
         })}
       </div>

@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 // require('dotenv').config();
@@ -33,12 +34,32 @@ export default function Map({ reports, zipcode }) {
     } else {
       if (reports && reports.data) {
         for (let i = 0; i < reports.data.length; i++) {
-          new mapboxgl.Marker()
+          const type = reports.data[i].typetext;
+          // const date = reports.data[i].timecreate;
+          const formattedTime = moment(reports.data[i].timecreate).format('lll');
+
+          const marker = new mapboxgl.Marker()
             .setLngLat([reports.data[i].location.coordinates[0], reports.data[i].location.coordinates[1]])
             .addTo(map.current);
+          let popup = new mapboxgl.Popup({
+            closeButton: true,
+            closeOnClick: false
+          });
+          marker.getElement().addEventListener('click', () => {
+            if (popup.isOpen()) {
+              popup.remove();
+            } else {
+              popup.setLngLat([reports.data[i].location.coordinates[0], reports.data[i].location.coordinates[1]])
+                .setHTML(`<p>${type} <br> ${formattedTime} <br> ${zipcode}</p>`)
+                .addTo(map.current);
+            }
+          });
         }
       }
-    }})
+    }
+  }, [reports]);
+
+
   return (
     <div>
       <div ref={mapContainer} className="map-container" />

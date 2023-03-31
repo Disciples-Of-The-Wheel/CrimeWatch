@@ -113,14 +113,28 @@ label {
   display: block;
   margin-bottom: 10px;
 }
-.modal-buttons {
+/* .modal-buttons {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
+} */
+
+/* .modal-buttons button {
+  flex-basis: 48%;
+} */
+.s-button {
+  margin-right: 5px;
 }
 
-.modal-buttons button {
-  flex-basis: 48%;
+.c-button {
+  margin-left: 5px;
+}
+.y-button {
+  margin-right: 5px;
+}
+
+.n-button {
+  margin-left: 5px;
 }
 /*
 TIMELINE
@@ -135,13 +149,13 @@ TIMELINE
 }
 
 .timeline-container {
-  background-color: white;
+  background-color: beige;
   display: flex;
   flex-direction: column;
   position: relative;
-  margin: 40px 0;
+  margin: 40px auto;
   max-height: 600px;
-  max-width: 90%;
+  max-width: 75%;
   overflow-y: scroll;
 }
 

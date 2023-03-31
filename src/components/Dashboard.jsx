@@ -13,9 +13,7 @@ const Dashboard = () => {
   const [mappedReports, setMappedReports] = useState([])
   const [zipcode, setZipcode] = useState(null)
 
-  function showMappedReports(){
-    console.log(mappedReports);
-  }
+
 
   function getReports(event) {
     event.preventDefault();
@@ -39,7 +37,6 @@ const Dashboard = () => {
       .then((mapped) => {
         axios.get('/api/reports/')
           .then((dbReports) => {
-            console.log('this is dbReports: ', dbReports);
             let promises = dbReports.data.map((ele) => {
               return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=' + ${ele.address} + ' ' + ${ele.city} + ' ' + ${ele.state} ' ' + ${ele.zipcode} + '&key=AIzaSyDNNEUdVHdTmB5zCTXDV_Y4p9dPMZl00rk`)
                 .then((res) => {
@@ -53,7 +50,6 @@ const Dashboard = () => {
                     description: ele.description, //description
                     user_submitted: true
                   };
-                  console.log('this is outputObj: ', outpObj);
                   return outpObj;
                 })
                 .catch((err) => {
@@ -63,7 +59,6 @@ const Dashboard = () => {
             return Promise.all(promises);
           })
           .then((mappedDb) => {
-            console.log('this is mappedDb: ', mappedDb);
             let newMappedReports = [];
             mapped.forEach((ele) => {
               newMappedReports.push(ele);
@@ -71,11 +66,9 @@ const Dashboard = () => {
             mappedDb.forEach((ele) => {
               newMappedReports.push(ele);
             });
-            console.log('this is newMappedReports: ', newMappedReports);
             return newMappedReports;
           })
           .then((newState) => {
-            console.log('this is newState: ', newState);
             setMappedReports(newState);
           })
           .catch((err) => {
@@ -85,7 +78,6 @@ const Dashboard = () => {
       .catch((err) => {
         console.error(err);
       });
-      console.log('this is mappedReports after everything completes: ', mappedReports);
   }
 
   function updateZip(event) {
@@ -101,7 +93,6 @@ const Dashboard = () => {
           <input type="submit" onClick={getReports} />
         </form>
       </div>
-      <button onClick={showMappedReports}>TEST API GET</button>
       <Map reports={reports} zipcode={zipcode} />
       <Timeline reports={reports} />
       <Charts mappedReports={mappedReports} />
