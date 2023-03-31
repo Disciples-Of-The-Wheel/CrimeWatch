@@ -50,7 +50,7 @@ export default function Map({ reports, zipcode }) {
               popup.remove();
             } else {
               popup.setLngLat([reports.data[i].location.coordinates[0], reports.data[i].location.coordinates[1]])
-                .setHTML(`<p>${type} <br> ${formattedTime}</p>`)
+                .setHTML(`<p>${type} <br> ${formattedTime} <br> ${zipcode}</p>`)
                 .addTo(map.current);
             }
           });
