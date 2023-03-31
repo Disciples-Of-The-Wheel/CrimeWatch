@@ -33,12 +33,23 @@ export default function Map({ reports, zipcode }) {
     } else {
       if (reports && reports.data) {
         for (let i = 0; i < reports.data.length; i++) {
-          new mapboxgl.Marker()
+          const type = reports.data[i].typetext;
+          const marker = new mapboxgl.Marker()
             .setLngLat([reports.data[i].location.coordinates[0], reports.data[i].location.coordinates[1]])
             .addTo(map.current);
+          marker.getElement().addEventListener('mouseenter', () => {
+            new mapboxgl.Popup()
+              .setLngLat([reports.data[i].location.coordinates[0], reports.data[i].location.coordinates[1]])
+              .setHTML(`<p>${type}</p>`)
+              .addTo(map.current);
+          });
+          marker.getElement().addEventListener('mouseleave', () => {
+            map.current.getPopup().remove();
+          });
         }
       }
-    }})
+    }
+  }, [reports]);
   return (
     <div>
       <div ref={mapContainer} className="map-container" />
