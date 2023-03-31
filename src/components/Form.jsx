@@ -32,7 +32,7 @@ const Form = () => {
 
   const handleConfirmNo = () => {
     setIsModalOpen(false);
-    alert("Please contact the authorities before making an Incident Report. \nHere is a list of contacts: \nPolice: 911 \nVIA LINK crisis line: Call 211 or 1-800-749-2673 \n988 Suicide and Crisis Lifeline: Call 988, Text 988, or Chat Online \nCrisis Text Line: Text NAMI to 741741 \nAlcohol Hotline: (800) 331-2900 \nNational Help Line for Substance Abuse: (800) 262-2463 \nNational Domestic Violence Hotline: (800) 799-7233 \nFor more information & assistance please visit:  namineworleans.org/crisis-info/");
+    alert("Please contact the authorities before making an Incident Report. \nHere's a list of contacts: \nPolice: 911 \nVIA LINK crisis line: Call 211 or 1-800-749-2673 \n988 Suicide and Crisis Lifeline: Call 988, Text 988, or Chat Online \nCrisis Text Line: Text NAMI to 741741 \nAlcohol Hotline: (800) 331-2900 \nNational Help Line for Substance Abuse: (800) 262-2463 \nNational Domestic Violence Hotline: (800) 799-7233 \nFor more information & assistance please visit:  namineworleans.org/crisis-info/");
   }
 
   function updateName(event) {
@@ -118,20 +118,20 @@ const Form = () => {
       <label>
         Incident Type:
         <select name="incident_type" onChange={updateIncidentType}>
-<option value="type1">SHOTS FIRED</option>
-<option value="type2">DOMESTIC VIOLENCE</option>
-<option value="type3">SUSPICIOUS EVENT</option>
-<option value="type4">DOMESTIC DISPUTE</option>
-<option value="type5">NOISE VIOLATION</option>
-<option value="type6">DISORDERLY CONDUCT</option>
-<option value="type7">SIMPLE ASSAULT</option>
-<option value="type8">ACCIDENT - HIT & RUN</option>
-<option value="type9">ACCIDENT - PROPERTY DAMAGE</option>
-<option value="type10">THEFT</option>
-<option value="type11">SUSPICIOUS VEHICLE</option>
-<option value="type12">TRAFFIC STOP</option>
-<option value="type13">TRESPASSING</option>
-<option value="type12">THREATS/HARASSMENT</option>
+<option value="SHOTS FIRED">SHOTS FIRED</option>
+<option value="DOMESTIC VIOLENCE">DOMESTIC VIOLENCE</option>
+<option value="SUSPICIOUS EVENT">SUSPICIOUS EVENT</option>
+<option value="DOMESTIC DISPUTE">DOMESTIC DISPUTE</option>
+<option value="NOISE VIOLATION">NOISE VIOLATION</option>
+<option value="DISORDERLY CONDUCT">DISORDERLY CONDUCT</option>
+<option value="SIMPLE ASSAULT">SIMPLE ASSAULT</option>
+<option value="ACCIDENT - HIT & RUN">ACCIDENT - HIT & RUN</option>
+<option value="ACCIDENT - PROPERTY DAMAGE">ACCIDENT - PROPERTY DAMAGE</option>
+<option value="THEFT">THEFT</option>
+<option value="SUSPICIOUS VEHICLE">SUSPICIOUS VEHICLE</option>
+<option value="TRAFFIC STOP">TRAFFIC STOP</option>
+<option value="TRESPASSING">TRESPASSING</option>
+<option value="THREATS/HARASSMENT">THREATS/HARASSMENT</option>
         </select>
       </label>
       <label>
