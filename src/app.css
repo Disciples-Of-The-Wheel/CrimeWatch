@@ -90,6 +90,9 @@ input {
   margin: 12px;
   border-radius: 4px;
 }
+h1 {
+  text-align: center;
+}
 
 
 /*
@@ -111,11 +114,12 @@ TIMELINE
   position: relative;
   margin: 40px 0;
   max-height: 600px;
+  max-width: 90%;
   overflow-y: scroll;
 }
 
 .timeline-container::after {
-  background-color: #e17b77;
+  background-color: #32378d;
   content: '';
   position: absolute;
   left: calc(50% - 2px);
@@ -139,7 +143,7 @@ TIMELINE
 }
 
 .timeline-item-content {
-  background-color: rgb(179, 232, 235);
+  background-color: rgb(131, 203, 207);
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   display: flex;
@@ -154,7 +158,7 @@ TIMELINE
 
 .timeline-item-content::after {
   content: '';
-  background-color: rgb(179, 232, 235);
+  background-color: rgb(131, 203, 207);
   box-shadow: 1px -1px 1px rgba(0, 0, 0, 0.2);
   position: absolute;
   transform: rotate(45deg);
@@ -205,7 +209,7 @@ TIMELINE
 
 .timeline-item-content .circle {
   background-color: #fff;
-  border: 3px solid #e17b77;
+  border: 3px solid #32378d;
   border-radius: 50%;
   position: absolute;
   top: calc(50% - 10px);
