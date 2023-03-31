@@ -94,7 +94,34 @@ h1 {
   text-align: center;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+}
 
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+/* FORM */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.modal-buttons button {
+  flex-basis: 48%;
+}
 /*
 TIMELINE
 */
