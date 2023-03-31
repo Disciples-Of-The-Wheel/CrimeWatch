@@ -7,9 +7,11 @@ module.exports = {
   extends: 'airbnb-base',
   overrides: [
   ],
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 'latest',
   },
   rules: {
+    'linebreak-style': 0,
   },
 };
