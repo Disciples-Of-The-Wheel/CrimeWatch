@@ -109,14 +109,28 @@ label {
   display: block;
   margin-bottom: 10px;
 }
-.modal-buttons {
+/* .modal-buttons {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
+} */
+
+/* .modal-buttons button {
+  flex-basis: 48%;
+} */
+.s-button {
+  margin-right: 5px;
 }
 
-.modal-buttons button {
-  flex-basis: 48%;
+.c-button {
+  margin-left: 5px;
+}
+.y-button {
+  margin-right: 5px;
+}
+
+.n-button {
+  margin-left: 5px;
 }
 /*
 TIMELINE

@@ -90,8 +90,8 @@ const Form = () => {
       <Modal isOpen={isModalOpen}>
         <div>
           <h2>Have you contacted the authorities?</h2>
-          <button onClick={handleConfirmYes}>Yes</button>
-          <button onClick={handleConfirmNo}>No</button>
+          <button className="y-button"onClick={handleConfirmYes}>Yes</button>
+          <button className="n-button"onClick={handleConfirmNo}>No</button>
         </div>
         </Modal>
         {showReportForm && (
@@ -138,8 +138,8 @@ const Form = () => {
           Incident Description: {" "} <textarea name="incident_description" onChange={updateIncidentDescription}></textarea>
         </label>
         <div className="modal-buttons">
-        <button type="submit" onClick={postIncidentReports}>Submit</button>
-        <button onClick={handleCloseModal}>Cancel</button>
+        <button className="s-button"type="submit" onClick={postIncidentReports}>Submit</button>
+        <button className="c-button"onClick={handleCloseModal}>Cancel</button>
         </div>
       </form>
       </Modal>
