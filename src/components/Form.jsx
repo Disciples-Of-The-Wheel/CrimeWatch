@@ -32,7 +32,7 @@ const Form = () => {
 
   const handleConfirmNo = () => {
     setIsModalOpen(false);
-    alert("Please contact the authorities before making an Incident Report.");
+    alert("Please contact the authorities before making an Incident Report. \nHere is a list of contacts: \nPolice: 911 \nVIA LINK crisis line: Call 211 or 1-800-749-2673 \n988 Suicide and Crisis Lifeline: Call 988, Text 988, or Chat Online \nCrisis Text Line: Text NAMI to 741741 \nAlcohol Hotline: (800) 331-2900 \nNational Help Line for Substance Abuse: (800) 262-2463 \nNational Domestic Violence Hotline: (800) 799-7233 \nFor more information & assistance please visit:  namineworleans.org/crisis-info/");
   }
 
   function updateName(event) {
