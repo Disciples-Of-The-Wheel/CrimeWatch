@@ -10,15 +10,33 @@ const axios = require('axios');
 const Dashboard = () => {
 
   const [reports, setReports] = useState([])
+  const [mappedReports, setMappedReports] = useState([])
   const [zipcode, setZipcode] = useState(null)
 
 
   function getReports(event) {
     event.preventDefault();
-      axios.get(`https://data.nola.gov/resource/pc5d-tvaw.json?$where=TimeCreate between '2023-03-22T00:00:00' and '2023-03-23T23:59:59' and zip = '${zipcode}'`
-      )
+    axios.get(`https://data.nola.gov/resource/pc5d-tvaw.json?$where=TimeCreate between '2023-03-22T00:00:00' and '2023-03-23T23:59:59' and zip = '${zipcode}'`
+    )
       .then((response) => {
         setReports(response)
+        // console.log('GET request response: ', response);
+        return response.data.map((ele) => {
+          return {
+            incident_type: ele.typetext, //typetext
+            address: ele.blockaddress, //blockaddress
+            lat: ele.location.coordinates[1], //location.coordinates[1]
+            long: ele.location.coordinates[0], //location.coordinates[0]
+            time: ele.timecreate, //timecreate
+            zip: ele.zip, //zip
+            description: ele.initialtypetext, //initialtypetext
+            user_submitted: false
+          };
+        })
+      })
+      .then((mapped) => {
+        setMappedReports(mapped);
+        console.log('Mapped reports: ', mapped);
       })
       .catch((err) => {
         console.error(err);
@@ -36,15 +54,15 @@ const Dashboard = () => {
   return (
     <div className='container'>
       <div className='form'>
-      <h2>Enter Zipcode</h2>
-      <form>
-        <input type="text" onChange={updateZip} />
-        <input type="submit" onClick={getReports} />
-      </form>
+        <h2>Enter Zipcode</h2>
+        <form>
+          <input type="text" onChange={updateZip} />
+          <input type="submit" onClick={getReports} />
+        </form>
       </div>
-      <Map reports={reports} zipcode={zipcode}/>
-      <Timeline reports={reports}/>
-      <Charts />
+      <Map reports={reports} zipcode={zipcode} />
+      <Timeline reports={reports} />
+      <Charts mappedReports={mappedReports} />
       <Form />
     </div>
   )
