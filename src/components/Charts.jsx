@@ -102,8 +102,8 @@ const Charts = ({ mappedReports }) => {
     <div>
       <h1>CHARTS</h1>
       <select name="charts" id="charts" onChange={onSelect}>
-        <option value="pie">Pie Chart</option>
         <option value="radar">Radar Chart</option>
+        <option value="pie">Pie Chart</option>
         <option value="bar">Bar Graph</option>
       </select>
       {renderSelect()}
