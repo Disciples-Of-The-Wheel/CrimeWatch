@@ -1,6 +1,10 @@
-import { LineChart, Line, BarChart, Bar, PieChart, Pie, Sector, Cell, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip, LabelList } from 'recharts';
+// import React, { PureComponent } from 'react';
+import { LineChart, Line, BarChart, Bar, PieChart, Pie, Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
+import { useEffect, useState, CSSProperties } from "react";
 
-const Charts = ({ reports }) => {
+const Charts = ({ mappedReports }) => {
+
+  const [selectedChart, setSelectedChart] = useState("pie");
 
   let dummyData = [{
     type: 'DOMESTIC VIOLENCE',
@@ -98,11 +102,11 @@ const Charts = ({ reports }) => {
     description: 'SIMPLE ASSAULT',
     alert: false,
   }];
-  
+
 
   let tally = {};
 
-  let pieChartData = [];
+  let chartData = [];
 
   dummyData.forEach((ele) => {
     if (tally[ele.type]) {
@@ -113,120 +117,120 @@ const Charts = ({ reports }) => {
   });
 
   for (let key in tally) {
-    pieChartData.push({
+    chartData.push({
       name: key,
-      value: tally[key]
+      value: tally[key],
     })
   }
 
-  const pieViewBox = { x: 50, y: 50, width: 50, height: 50 };
+  let chosenColor = 'yellow';
 
-  const chartData = [{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 }, { name: 'Page B', uv: 300, pv: 1400, amt: 1400 }, { name: 'Page A', uv: 500, pv: 3000, amt: 3000 }];
-
-  const data01 = [
-    { name: 'Group A', value: 400 },
-    { name: 'Group B', value: 300 },
-    { name: 'Group C', value: 300 },
-    { name: 'Group D', value: 200 },
-  ];
-  const data02 = [
-    { name: 'A1', value: 100 },
-    { name: 'A2', value: 300 },
-    { name: 'B1', value: 100 },
-    { name: 'B2', value: 80 },
-    { name: 'B3', value: 40 },
-    { name: 'B4', value: 30 },
-    { name: 'B5', value: 50 },
-    { name: 'C1', value: 100 },
-    { name: 'C2', value: 200 },
-    { name: 'D1', value: 150 },
-    { name: 'D2', value: 50 },
-  ];
-
-  function getIntroOfPage(label) {
-    if (label === 'Page A') {
-      return 'Page A is about men\'s clothing';
-    } if (label === 'Page B') {
-      return 'Page B is about women\'s dress';
-    } if (label === 'Page C') {
-      return 'Page C is about women\'s bag';
-    } if (label === 'Page D') {
-      return 'Page D is about household goods';
-    } if (label === 'Page E') {
-      return 'Page E is about food';
-    } if (label === 'Page F') {
-      return 'Page F is about baby food';
-    }
+  const calculateChartPercent = (val) => {
+    let percent = Math.trunc((val / (chartData.length - 1)) * 100);
+    // if(percent < 20){
+    //   chosenColor = "green";
+    // }else if (percent >= 20 && percent < 50){
+    //   chosenColor = "yellow";
+    // }else if(percent >= 50 && percent < 75){
+    //   chosenColor = "orange";
+    // }else{
+    //   chosenColor = "red"
+    // }
+    return percent + '%';
   }
 
-  function CustomTooltip({ payload, label, active }) {
+
+  function ChartTooltip({ payload, label, active }) {
     if (active) {
       return (
-        <div className="custom-tooltip">
-          <p className="label">{`${label} : ${payload[0].value}`}</p>
-          <p className="intro">{getIntroOfPage(label)}</p>
-          <p className="desc">Anything you want can be displayed here.</p>
-        </div>
+        <div>
+          <p>{`Incident Type: ${payload[0].name}`}</p>
+          <p>{`Number of Incidents: ${payload[0].value}`}</p>
+          <p>Percentage of Incidents: {calculateChartPercent(payload[0].value)}</p>
+        </div >
       );
     }
 
     return null;
   }
 
-  function PieChartTooltip({ payload, label, active }) {
-    if (active) {
-      return (
-        <div className="custom-tooltip">
-          <p className="label">{`${label} : ${payload[0].value}`}</p>
-          <p className="intro">{getIntroOfPage(label)}</p>
-          <p className="desc">Anything you want can be displayed here.</p>
-        </div>
-      );
-    }
-
-    return null;
-  }
-
-  //center circle should be the city as a whole, outer circle should be the current zipcode data
   const renderPieChart = (
     <ResponsiveContainer width="100%" height="50%">
       <PieChart width={200} height={200}>
-        <Tooltip content={<PieChartTooltip />} fill="#e39619" />
-        <Pie data={pieChartData} dataKey="value" cx="50%" cy="50%" outerRadius={120} fill="#1411bd" />
-        <Pie data={pieChartData} dataKey="value" cx="50%" cy="50%" innerRadius={140} outerRadius={180} fill="#cc1c0c" label />
+        <Tooltip content={<ChartTooltip />} wrapperStyle={{ backgroundColor: chosenColor, opacity: 0.8 }} />
+        <Pie data={chartData} dataKey="value" cx="50%" cy="50%" outerRadius={140} fill="#1411bd" />
+        <Pie data={chartData} dataKey="value" cx="50%" cy="50%" innerRadius={140} outerRadius={180} fill="#cc1c0c" label />
       </PieChart>
     </ResponsiveContainer>
   )
 
-  const renderLineChart = (
-    <LineChart width={600} height={300} data={chartData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-      <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-    </LineChart>
-  )
-
   const renderBarChart = (
-    <BarChart width={600} height={300} data={chartData}>
-      <XAxis dataKey="name" stroke="#8884d8" />
-      <YAxis />
-      <Tooltip content={<CustomTooltip />} />
-      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-      <Bar dataKey="uv" barSize={30} fill="#8884d8" />
-    </BarChart>
+    <ResponsiveContainer width="100%" height="50%">
+      <BarChart width={600} height={300} data={chartData}>
+        <XAxis dataKey="name" stroke="#8884d8" />
+        <YAxis />
+        <Tooltip content={<ChartTooltip />} />
+        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+        <Bar dataKey="value" barSize={30} fill="#cc1c0c" />
+      </BarChart>
+    </ResponsiveContainer>
   );
+
+  const renderRadarChart = (
+    <ResponsiveContainer width="100%" height="50%">
+      <RadarChart outerRadius={180} width={200} height={200} data={chartData}>
+        <PolarGrid />
+        <PolarAngleAxis dataKey="name" />
+        <PolarRadiusAxis angle={30} />
+        <Radar dataKey="value" stroke="#d91d0f" fill="#de0b19" fillOpacity={0.6} />
+      </RadarChart>
+    </ResponsiveContainer>
+  );
+
+  function onSelect(event) {
+    setSelectedChart(event.target.value);
+  }
+
+  function renderSelect() {
+    //     if (selectedChart === 'pie') {
+    //       return (
+    //         <h2>Pie Chart</h2>
+    //         { renderPieChart }
+    //       );
+    //     } else if (selectedChart === 'radar') {
+    //   return (
+    //     <h2>Radar Chart</h2>
+    //   { renderRadarChart }
+    //   );
+    // } else if (selectedChart === 'bar') {
+    //   return (
+    //     <h2>Bar Graph</h2>
+    //   { renderBarChart }
+    //   );
+    // } else {
+    //   return null;
+    // }
+    if (selectedChart === 'pie') {
+      return renderPieChart;
+    } else if (selectedChart === 'radar') {
+      return renderRadarChart;
+    } else if (selectedChart === 'bar') {
+      return renderBarChart;
+    } else {
+      return null;
+    }
+  }
+
 
   return (
     <div>
       <h1>CHARTS</h1>
-      <h2>Line Graph</h2>
-      {renderLineChart}
-      <h2>Bar Graph</h2>
-      {renderBarChart}
-      <h2>Pie Chart</h2>
-      {renderPieChart}
+      <select name="charts" id="charts" onChange={onSelect}>
+        <option value="pie">Pie Chart</option>
+        <option value="radar">Radar Chart</option>
+        <option value="bar">Bar Graph</option>
+      </select>
+      {renderSelect()}
     </div>
   )
 }

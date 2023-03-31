@@ -4,7 +4,7 @@ const { Report } = require('../db');
 const Reports = Router();
 
 Reports.get('/', (req, res) => {
-  Report.findAll()
+  Report.findAll({})
     .then((reports) => {
       res.status(200);
       res.send(reports);

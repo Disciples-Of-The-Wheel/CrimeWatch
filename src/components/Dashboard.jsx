@@ -13,6 +13,20 @@ const Dashboard = () => {
   const [mappedReports, setMappedReports] = useState([])
   const [zipcode, setZipcode] = useState(null)
 
+  // useEffect(() => {
+  //   getReportsFromDb();
+  // })
+
+  function getReportsFromDb() {
+    axios.get('/api/reports/')
+      .then((reports) => {
+        // setMappedReports(reports);
+        console.log('results of GET request to db: ', reports);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 
   function getReports(event) {
     event.preventDefault();
@@ -20,7 +34,7 @@ const Dashboard = () => {
     )
       .then((response) => {
         setReports(response)
-        // console.log('GET request response: ', response);
+        console.log('GET request response: ', response);
         return response.data.map((ele) => {
           return {
             incident_type: ele.typetext, //typetext
@@ -35,8 +49,15 @@ const Dashboard = () => {
         })
       })
       .then((mapped) => {
-        setMappedReports(mapped);
-        console.log('Mapped reports: ', mapped);
+        // console.log('Mapped reports: ', mapped);
+        getReportsFromDb()
+          .then((dbReports) => {
+            setMappedReports([...mapped, ...dbReports]);
+          })
+          .then()
+          .catch((err) => {
+            console.error(err);
+          })
       })
       .catch((err) => {
         console.error(err);
@@ -60,6 +81,8 @@ const Dashboard = () => {
           <input type="submit" onClick={getReports} />
         </form>
       </div>
+      <button onClick={getReportsFromDb}>TEST DB GET</button>
+      <button onClick={getReports}>TEST API GET</button>
       <Map reports={reports} zipcode={zipcode} />
       <Timeline reports={reports} />
       <Charts mappedReports={mappedReports} />
