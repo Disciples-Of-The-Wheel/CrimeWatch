@@ -52,6 +52,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mapbox-gl": "^2.13.0",
+    "moment": "^2.29.4",
     "mysql2": "^3.2.0",
     "nodemon": "^2.0.22",
     "passport": "^0.5.3",
