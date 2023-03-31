@@ -4,22 +4,91 @@ import { useEffect, useState, CSSProperties } from "react";
 
 const Charts = ({ mappedReports }) => {
 
-  const [selectedChart, setSelectedChart] = useState('radar');
-
+  const [selectedChart, setSelectedChart] = useState('pie');
 
   let tally = {};
 
   let chartData = [];
 
   mappedReports.forEach((ele) => {
-    if (tally[ele.incident_type]) {
-      tally[ele.incident_type]++;
-    } else {
-      tally[ele.incident_type] = 1;
-    }
+    let misc = true;
+    let incidentSplit = ele.incident_type.split(' ');
+    incidentSplit.forEach(word => {
+      if(word === 'DOMESTIC'){
+        if(!tally.Domestic){
+          tally.Domestic = 1;
+        }else{
+          tally.Domestic++
+        }
+        misc = false;
+      }
+      if(word === 'BURGLARY' || word === 'THEFT' || word === 'ROBBERY' || word === 'STOLEN'){
+        if(!tally.Theft){
+          tally.Theft = 1;
+        }else{
+          tally.Theft++
+        }
+        misc = false;
+      }
+      if(word === 'ASSAULT' || word === 'WEAPON' || word === 'MURDER' || word === 'SHOOTING' || word === 'SHOTS'){
+        if(!tally.Violent){
+          tally.Violent = 1;
+        }else{
+          tally.Violent++
+        }
+        misc = false;
+      }
+      if(word === 'TRAFFIC' || word === 'VEHICLE' || word === 'ROADWAY' || word === 'DRIVING'){
+        if(!tally.Traffic){
+          tally.Traffic = 1;
+        }else{
+          tally.Traffic++
+        }
+        misc = false;
+      }
+      if(word === 'ACCIDENT'){
+        if(!tally.Accident){
+          tally.Accident = 1;
+        }else{
+          tally.Accident++
+        }
+        misc = false;
+      }
+      if(word === 'MEDICAL' || word === 'MEDIC' || word === 'DISTURBED'){
+        if(!tally.Medical){
+          tally.Medical = 1;
+        }else{
+          tally.Medical++
+        }
+        misc = false;
+      }
+      if(misc === true){
+        if(!tally.Misc){
+          tally.Misc = 1;
+        }else{
+          tally.Misc++
+        }
+      }
+    })
   });
 
   for (let key in tally) {
+    let type = '';
+    if(key === 'Domestic'){
+      type = 'Domestic Issues';
+    }else if(key === 'Theft'){
+      type = 'Burglary/Theft';
+    }else if(key === 'Violent'){
+      type = 'Violent Crime';
+    }else if(key === 'Traffic'){
+      type = 'Traffic Incidents';
+    }else if(key === 'Accident'){
+      type = 'Accidents';
+    }else if(key === 'Medical'){
+      type = 'Medical/Psychiatric Incidents';
+    }else if (key === 'Misc'){
+      type = 'Miscellaneous Reports';
+    }
     chartData.push({
       name: key,
       value: tally[key],
@@ -44,7 +113,19 @@ const Charts = ({ mappedReports }) => {
         </div >
       );
     }
+    return null;
+  }
 
+  function BarChartTooltip({ payload, label, active }) {
+    if (active) {
+      return (
+        <div>
+          <p>{`Incident Type: ${payload[0].payload.name}`}</p>
+          <p>{`Number of Incidents: ${payload[0].value}`}</p>
+          <p>Percentage of Incidents: {calculateChartPercent(payload[0].value)}</p>
+        </div >
+      );
+    }
     return null;
   }
 
@@ -63,7 +144,7 @@ const Charts = ({ mappedReports }) => {
       <BarChart width={600} height={300} data={chartData}>
         <XAxis dataKey="name" stroke="#8884d8" />
         <YAxis />
-        <Tooltip content={<ChartTooltip />} />
+        <Tooltip content={<BarChartTooltip />} />
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
         <Bar dataKey="value" barSize={30} fill="#cc1c0c" />
       </BarChart>
@@ -102,8 +183,8 @@ const Charts = ({ mappedReports }) => {
     <div>
       <h1>CHARTS</h1>
       <select name="charts" id="charts" onChange={onSelect}>
-        <option value="radar">Radar Chart</option>
         <option value="pie">Pie Chart</option>
+        <option value="radar">Radar Chart</option>
         <option value="bar">Bar Graph</option>
       </select>
       {renderSelect()}
