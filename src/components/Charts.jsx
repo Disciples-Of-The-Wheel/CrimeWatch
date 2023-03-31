@@ -6,113 +6,117 @@ const Charts = ({ mappedReports }) => {
 
   const [selectedChart, setSelectedChart] = useState("pie");
 
-  let dummyData = [{
-    type: 'DOMESTIC VIOLENCE',
-    location: '026XX Poydras St',
-    time: '2023-03-22T00:04:16.803',
-    zip: 70119,
-    description: 'DOMESTIC VIOLENCE',
-    alert: false,
-  },
-  {
-    type: 'SUSPICIOUS EVENT',
-    location: '037XX Desire Pkwy',
-    time: '2023-03-22T00:10:10.690',
-    zip: 70126,
-    description: 'SHOTS FIRED',
-    alert: false,
-  },
-  {
-    type: 'ALARM: COMMERCIAL - BURGLARY',
-    location: '033XX Huntlee Dr',
-    time: '2023-03-22T00:10:33.920',
-    zip: 70131,
-    description: 'ALARM: COMMERCIAL - BURGLARY',
-    alert: false,
-  },
-  {
-    type: 'SHOTS FIRED',
-    location: 'Almonaster A & Elaine St',
-    time: '2023-03-22T00:11:25.940',
-    zip: 70126,
-    description: 'SHOTS FIRED',
-    alert: false,
-  },
-  {
-    type: 'SUSPICIOUS EVENT',
-    location: '037XX Desire Pkwy',
-    time: '2023-03-22T00:10:10.690',
-    zip: 70126,
-    description: 'SHOTS FIRED',
-    alert: false,
-  },
-  {
-    type: 'DOMESTIC DISPUTE',
-    location: '021XX Louisiana Av',
-    time: '2023-03-22T00:13:38.380',
-    zip: 70115,
-    description: 'DOMESTIC DISPUTE',
-    alert: false,
-  },
-  {
-    type: 'SUSPICIOUS EVENT',
-    location: '037XX Desire Pkwy',
-    time: '2023-03-22T00:10:10.690',
-    zip: 70126,
-    description: 'SHOTS FIRED',
-    alert: false,
-  },
-  {
-    type: 'NOISE VIOLATION',
-    location: '046XX Lynhuber Dr',
-    time: '2023-03-22T00:14:29.433',
-    zip: 70126,
-    description: 'NOISE VIOLATION',
-    alert: false,
-  },
-  {
-    type: 'SHOTS FIRED',
-    location: '083XX Chef Menteur Hwy',
-    time: '2023-03-22T00:15:24.740',
-    zip: 70126,
-    description: 'SHOTS FIRED',
-    alert: false,
-  },
-  {
-    type: 'SUSPICIOUS EVENT',
-    location: '037XX Desire Pkwy',
-    time: '2023-03-22T00:10:10.690',
-    zip: 70126,
-    description: 'SHOTS FIRED',
-    alert: false,
-  },
-  {
-    type: 'VEHICLE RECOVERY',
-    location: 'General De Gaulle Dr & Shirley Dr',
-    time: '2023-03-22T00:21:24.990',
-    zip: 70114,
-    description: 'ABANDONED VEHICLE',
-    alert: false,
-  },
-  {
-    type: 'DOMESTIC VIOLENCE',
-    location: 'S Claiborne Av & General Taylor St',
-    time: '2023-03-22T00:23:15.440',
-    zip: 70125,
-    description: 'SIMPLE ASSAULT',
-    alert: false,
-  }];
 
+  function clickTest(){
+    console.log('mappedReports: ', mappedReports);
+  }
+
+  // let dummyData = [{
+  //   type: 'DOMESTIC VIOLENCE',
+  //   location: '026XX Poydras St',
+  //   time: '2023-03-22T00:04:16.803',
+  //   zip: 70119,
+  //   description: 'DOMESTIC VIOLENCE',
+  //   alert: false,
+  // },
+  // {
+  //   type: 'SUSPICIOUS EVENT',
+  //   location: '037XX Desire Pkwy',
+  //   time: '2023-03-22T00:10:10.690',
+  //   zip: 70126,
+  //   description: 'SHOTS FIRED',
+  //   alert: false,
+  // },
+  // {
+  //   type: 'ALARM: COMMERCIAL - BURGLARY',
+  //   location: '033XX Huntlee Dr',
+  //   time: '2023-03-22T00:10:33.920',
+  //   zip: 70131,
+  //   description: 'ALARM: COMMERCIAL - BURGLARY',
+  //   alert: false,
+  // },
+  // {
+  //   type: 'SHOTS FIRED',
+  //   location: 'Almonaster A & Elaine St',
+  //   time: '2023-03-22T00:11:25.940',
+  //   zip: 70126,
+  //   description: 'SHOTS FIRED',
+  //   alert: false,
+  // },
+  // {
+  //   type: 'SUSPICIOUS EVENT',
+  //   location: '037XX Desire Pkwy',
+  //   time: '2023-03-22T00:10:10.690',
+  //   zip: 70126,
+  //   description: 'SHOTS FIRED',
+  //   alert: false,
+  // },
+  // {
+  //   type: 'DOMESTIC DISPUTE',
+  //   location: '021XX Louisiana Av',
+  //   time: '2023-03-22T00:13:38.380',
+  //   zip: 70115,
+  //   description: 'DOMESTIC DISPUTE',
+  //   alert: false,
+  // },
+  // {
+  //   type: 'SUSPICIOUS EVENT',
+  //   location: '037XX Desire Pkwy',
+  //   time: '2023-03-22T00:10:10.690',
+  //   zip: 70126,
+  //   description: 'SHOTS FIRED',
+  //   alert: false,
+  // },
+  // {
+  //   type: 'NOISE VIOLATION',
+  //   location: '046XX Lynhuber Dr',
+  //   time: '2023-03-22T00:14:29.433',
+  //   zip: 70126,
+  //   description: 'NOISE VIOLATION',
+  //   alert: false,
+  // },
+  // {
+  //   type: 'SHOTS FIRED',
+  //   location: '083XX Chef Menteur Hwy',
+  //   time: '2023-03-22T00:15:24.740',
+  //   zip: 70126,
+  //   description: 'SHOTS FIRED',
+  //   alert: false,
+  // },
+  // {
+  //   type: 'SUSPICIOUS EVENT',
+  //   location: '037XX Desire Pkwy',
+  //   time: '2023-03-22T00:10:10.690',
+  //   zip: 70126,
+  //   description: 'SHOTS FIRED',
+  //   alert: false,
+  // },
+  // {
+  //   type: 'VEHICLE RECOVERY',
+  //   location: 'General De Gaulle Dr & Shirley Dr',
+  //   time: '2023-03-22T00:21:24.990',
+  //   zip: 70114,
+  //   description: 'ABANDONED VEHICLE',
+  //   alert: false,
+  // },
+  // {
+  //   type: 'DOMESTIC VIOLENCE',
+  //   location: 'S Claiborne Av & General Taylor St',
+  //   time: '2023-03-22T00:23:15.440',
+  //   zip: 70125,
+  //   description: 'SIMPLE ASSAULT',
+  //   alert: false,
+  // }];
 
   let tally = {};
 
   let chartData = [];
 
-  dummyData.forEach((ele) => {
-    if (tally[ele.type]) {
-      tally[ele.type]++;
+  mappedReports.forEach((ele) => {
+    if (tally[ele.incident_type]) {
+      tally[ele.incident_type]++;
     } else {
-      tally[ele.type] = 1;
+      tally[ele.incident_type] = 1;
     }
   });
 
@@ -225,6 +229,7 @@ const Charts = ({ mappedReports }) => {
   return (
     <div>
       <h1>CHARTS</h1>
+      <button >TEST</button>
       <select name="charts" id="charts" onChange={onSelect}>
         <option value="pie">Pie Chart</option>
         <option value="radar">Radar Chart</option>

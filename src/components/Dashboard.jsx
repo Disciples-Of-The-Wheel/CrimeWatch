@@ -25,14 +25,14 @@ const Dashboard = () => {
         setReports(response)
         return response.data.map((ele) => {
           return {
-            // incident_type: ele.typetext, //typetext
-            // address: ele.block_address, //blockaddress
-            // lat: ele.location.coordinates[1], //location.coordinates[1]
-            // long: ele.location.coordinates[0], //location.coordinates[0]
-            // time: ele.timecreate, //timecreate
-            // zip: ele.zip, //zip
-            // description: ele.initialtypetext, //initialtypetext
-            // user_submitted: false
+            incident_type: ele.typetext, //typetext
+            address: ele.block_address, //blockaddress
+            lat: ele.location.coordinates[1], //location.coordinates[1]
+            long: ele.location.coordinates[0], //location.coordinates[0]
+            time: ele.timecreate, //timecreate
+            zip: ele.zip, //zip
+            description: ele.initialtypetext, //initialtypetext
+            user_submitted: false
           };
         })
       })
@@ -40,8 +40,8 @@ const Dashboard = () => {
         axios.get('/api/reports/')
           .then((dbReports) => {
             console.log('this is dbReports: ', dbReports);
-            return dbReports.data.map((ele) => {
-              let outp = axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=' + ${ele.address} + ' ' + ${ele.city} + ' ' + ${ele.state} ' ' + ${ele.zipcode} + '&key=AIzaSyDNNEUdVHdTmB5zCTXDV_Y4p9dPMZl00rk`)
+            let promises = dbReports.data.map((ele) => {
+              return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=' + ${ele.address} + ' ' + ${ele.city} + ' ' + ${ele.state} ' ' + ${ele.zipcode} + '&key=AIzaSyDNNEUdVHdTmB5zCTXDV_Y4p9dPMZl00rk`)
                 .then((res) => {
                   let outpObj = {
                     incident_type: ele.incident_type, //incident_type
@@ -59,14 +59,11 @@ const Dashboard = () => {
                 .catch((err) => {
                   console.error(err);
                 });
-                console.log('this is the outp variable: ', outp);
-              return outp;
             });
+            return Promise.all(promises);
           })
           .then((mappedDb) => {
             console.log('this is mappedDb: ', mappedDb);
-            let resolvedPromise = Promise.resolve(mappedDb);
-            console.log('this is the resolved promise for mappedDb: ', resolvedPromise);
             let newMappedReports = [];
             mapped.forEach((ele) => {
               newMappedReports.push(ele);
