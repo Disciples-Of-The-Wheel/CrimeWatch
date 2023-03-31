@@ -34,22 +34,29 @@ export default function Map({ reports, zipcode }) {
       if (reports && reports.data) {
         for (let i = 0; i < reports.data.length; i++) {
           const type = reports.data[i].typetext;
+          const date = reports.data[i].timecreate;
           const marker = new mapboxgl.Marker()
             .setLngLat([reports.data[i].location.coordinates[0], reports.data[i].location.coordinates[1]])
             .addTo(map.current);
-          marker.getElement().addEventListener('mouseenter', () => {
-            new mapboxgl.Popup()
-              .setLngLat([reports.data[i].location.coordinates[0], reports.data[i].location.coordinates[1]])
-              .setHTML(`<p>${type}</p>`)
-              .addTo(map.current);
+          let popup = new mapboxgl.Popup({
+            closeButton: true,
+            closeOnClick: false
           });
-          marker.getElement().addEventListener('mouseleave', () => {
-            map.current.getPopup().remove();
+          marker.getElement().addEventListener('click', () => {
+            if (popup.isOpen()) {
+              popup.remove();
+            } else {
+              popup.setLngLat([reports.data[i].location.coordinates[0], reports.data[i].location.coordinates[1]])
+                .setHTML(`<p>${type} ${date}</p>`)
+                .addTo(map.current);
+            }
           });
         }
       }
     }
   }, [reports]);
+
+
   return (
     <div>
       <div ref={mapContainer} className="map-container" />
