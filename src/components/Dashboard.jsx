@@ -13,19 +13,8 @@ const Dashboard = () => {
   const [mappedReports, setMappedReports] = useState([])
   const [zipcode, setZipcode] = useState(null)
 
-  // useEffect(() => {
-  //   getReportsFromDb();
-  // })
-
-  function getReportsFromDb() {
-    axios.get('/api/reports/')
-      .then((reports) => {
-        // setMappedReports(reports);
-        console.log('results of GET request to db: ', reports);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  function showMappedReports(){
+    console.log(mappedReports);
   }
 
   function getReports(event) {
@@ -34,43 +23,77 @@ const Dashboard = () => {
     )
       .then((response) => {
         setReports(response)
-        console.log('GET request response: ', response);
         return response.data.map((ele) => {
           return {
-            incident_type: ele.typetext, //typetext
-            address: ele.blockaddress, //blockaddress
-            lat: ele.location.coordinates[1], //location.coordinates[1]
-            long: ele.location.coordinates[0], //location.coordinates[0]
-            time: ele.timecreate, //timecreate
-            zip: ele.zip, //zip
-            description: ele.initialtypetext, //initialtypetext
-            user_submitted: false
+            // incident_type: ele.typetext, //typetext
+            // address: ele.block_address, //blockaddress
+            // lat: ele.location.coordinates[1], //location.coordinates[1]
+            // long: ele.location.coordinates[0], //location.coordinates[0]
+            // time: ele.timecreate, //timecreate
+            // zip: ele.zip, //zip
+            // description: ele.initialtypetext, //initialtypetext
+            // user_submitted: false
           };
         })
       })
       .then((mapped) => {
-        // console.log('Mapped reports: ', mapped);
-        getReportsFromDb()
+        axios.get('/api/reports/')
           .then((dbReports) => {
-            setMappedReports([...mapped, ...dbReports]);
+            console.log('this is dbReports: ', dbReports);
+            return dbReports.data.map((ele) => {
+              let outp = axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=' + ${ele.address} + ' ' + ${ele.city} + ' ' + ${ele.state} ' ' + ${ele.zipcode} + '&key=AIzaSyDNNEUdVHdTmB5zCTXDV_Y4p9dPMZl00rk`)
+                .then((res) => {
+                  let outpObj = {
+                    incident_type: ele.incident_type, //incident_type
+                    address: ele.address, //address
+                    lat: res.data.results[0].geometry.location.lat,
+                    long: res.data.results[0].geometry.location.lng,
+                    time: ele.createdAt, //createdAt
+                    zip: ele.zipcode, //zipcode
+                    description: ele.description, //description
+                    user_submitted: true
+                  };
+                  console.log('this is outputObj: ', outpObj);
+                  return outpObj;
+                })
+                .catch((err) => {
+                  console.error(err);
+                });
+                console.log('this is the outp variable: ', outp);
+              return outp;
+            });
           })
-          .then()
+          .then((mappedDb) => {
+            console.log('this is mappedDb: ', mappedDb);
+            let resolvedPromise = Promise.resolve(mappedDb);
+            console.log('this is the resolved promise for mappedDb: ', resolvedPromise);
+            let newMappedReports = [];
+            mapped.forEach((ele) => {
+              newMappedReports.push(ele);
+            });
+            mappedDb.forEach((ele) => {
+              newMappedReports.push(ele);
+            });
+            console.log('this is newMappedReports: ', newMappedReports);
+            return newMappedReports;
+          })
+          .then((newState) => {
+            console.log('this is newState: ', newState);
+            setMappedReports(newState);
+          })
           .catch((err) => {
             console.error(err);
           })
       })
       .catch((err) => {
         console.error(err);
-      })
+      });
+      console.log('this is mappedReports after everything completes: ', mappedReports);
   }
 
   function updateZip(event) {
     setZipcode(event.target.value)
   }
-
-  //   useEffect(() => {
-  //   console.log("reports updated:", reports);
-  // }, [reports]);
 
   return (
     <div className='container'>
@@ -81,8 +104,7 @@ const Dashboard = () => {
           <input type="submit" onClick={getReports} />
         </form>
       </div>
-      <button onClick={getReportsFromDb}>TEST DB GET</button>
-      <button onClick={getReports}>TEST API GET</button>
+      <button onClick={showMappedReports}>TEST API GET</button>
       <Map reports={reports} zipcode={zipcode} />
       <Timeline reports={reports} />
       <Charts mappedReports={mappedReports} />
