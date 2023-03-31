@@ -135,13 +135,13 @@ TIMELINE
 }
 
 .timeline-container {
-  background-color: white;
+  background-color: beige;
   display: flex;
   flex-direction: column;
   position: relative;
-  margin: 40px 0;
+  margin: 40px auto;
   max-height: 600px;
-  max-width: 90%;
+  max-width: 75%;
   overflow-y: scroll;
 }
 
