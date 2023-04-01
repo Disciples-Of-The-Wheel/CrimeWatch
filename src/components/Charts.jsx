@@ -175,7 +175,6 @@ const Charts = ({ mappedReports }) => {
 
   return (
     <div>
-      <h1>CHARTS</h1>
       <ul class="menu cf">
         <li>
           <a>Select Chart</a>
