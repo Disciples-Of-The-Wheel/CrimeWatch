@@ -29,7 +29,7 @@ const Dashboard = () => {
             long: ele.location.coordinates[0], //location.coordinates[0]
             time: ele.timecreate, //timecreate
             zip: ele.zip, //zip
-            description: ele.initialtypetext, //initialtypetext
+            disposition: ele.dispositiontext, //initialtypetext
             user_submitted: false
           };
         })
@@ -94,7 +94,7 @@ const Dashboard = () => {
         </form>
       </div>
       <Map reports={reports} zipcode={zipcode} />
-      <Timeline reports={reports} />
+      <Timeline reports={mappedReports} />
       <Charts mappedReports={mappedReports} />
       <Form />
     </div>

@@ -3,8 +3,8 @@ import TimelineItem from "./TimelineItem";
 
 const Timeline = ({ reports }) => {
 
-  const sortedReports = reports.data?.sort((a, b) => {
-    return new Date(b.timecreate) - new Date(a.timecreate);
+  const sortedReports = reports?.sort((a, b) => {
+    return new Date(b.time) - new Date(a.time);
   });
 
   return (

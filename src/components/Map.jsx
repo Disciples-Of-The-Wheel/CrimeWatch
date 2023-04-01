@@ -37,7 +37,6 @@ export default function Map({ reports, zipcode }) {
           const type = reports.data[i].typetext;
           // const date = reports.data[i].timecreate;
           const formattedTime = moment(reports.data[i].timecreate).format('lll');
-          const address = reports.data[i].block_address;
 
           const marker = new mapboxgl.Marker()
             .setLngLat([reports.data[i].location.coordinates[0], reports.data[i].location.coordinates[1]])
@@ -51,7 +50,7 @@ export default function Map({ reports, zipcode }) {
               popup.remove();
             } else {
               popup.setLngLat([reports.data[i].location.coordinates[0], reports.data[i].location.coordinates[1]])
-                .setHTML(`<p>${type} <br> ${formattedTime} <br> ${address} <br> ${zipcode}</p>`)
+                .setHTML(`<p>${type} <br> ${formattedTime} <br> ${zipcode}</p>`)
                 .addTo(map.current);
             }
           });
