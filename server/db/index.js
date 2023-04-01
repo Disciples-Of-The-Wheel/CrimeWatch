@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 const DB_NAME = 'crimewatch';
 const DB_USER = 'root';
-const DB_PASS = 'trunks';
+const DB_PASS = 'root';
 
 const sequelize = new Sequelize(
   DB_NAME,

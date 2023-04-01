@@ -4,7 +4,7 @@ import { useEffect, useState, CSSProperties } from "react";
 
 const Charts = ({ mappedReports }) => {
 
-  const [selectedChart, setSelectedChart] = useState('pie');
+  const [selectedChart, setSelectedChart] = useState('bar');
 
   let tally = {};
 
@@ -91,7 +91,7 @@ const Charts = ({ mappedReports }) => {
   let chosenColor = 'yellow';
 
   const calculateChartPercent = (val) => {
-    let percent = Math.trunc((val / (chartData.length - 1)) * 100);
+    let percent = Math.trunc((val / (mappedReports.length - 1)) * 100);
     return percent + '%';
   }
 
@@ -160,25 +160,25 @@ const Charts = ({ mappedReports }) => {
   }
 
   function renderSelect() {
-    if (selectedChart === 'pie') {
-      return renderPieChart;
-    } else if (selectedChart === 'radar') {
-      return renderRadarChart;
-    } else if (selectedChart === 'bar') {
-      return renderBarChart;
-    } else {
-      return null;
+    if (mappedReports[0]) {
+      if (selectedChart === 'pie') {
+        return renderPieChart;
+      } else if (selectedChart === 'radar') {
+        return renderRadarChart;
+      } else if (selectedChart === 'bar') {
+        return renderBarChart;
+      } else {
+        return null;
+      }
     }
   }
 
-
   return (
     <div>
-      <h1>CHARTS</h1>
       <select name="charts" id="charts" onChange={onSelect}>
+      <option value="bar">Bar Graph</option>
         <option value="pie">Pie Chart</option>
         <option value="radar">Radar Chart</option>
-        <option value="bar">Bar Graph</option>
       </select>
       {renderSelect()}
     </div>
