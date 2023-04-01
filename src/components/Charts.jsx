@@ -89,8 +89,6 @@ const Charts = ({ mappedReports }) => {
     })
   }
 
-  let chosenColor = 'yellow';
-
   const calculateChartPercent = (val) => {
     let percent = Math.trunc((val / (mappedReports.length - 1)) * 100);
     return percent + '%';
@@ -126,7 +124,7 @@ const Charts = ({ mappedReports }) => {
   const renderPieChart = (
     <ResponsiveContainer width="100%" height="50%">
       <PieChart width={200} height={200}>
-        <Tooltip content={<ChartTooltip />} wrapperStyle={{ backgroundColor: chosenColor, opacity: 0.8 }} />
+        <Tooltip content={<ChartTooltip />} wrapperStyle={{ backgroundColor: 'yellow', opacity: 0.8 }} />
         <Pie data={chartData} dataKey="value" cx="50%" cy="50%" outerRadius={140} fill="#1411bd" />
         <Pie data={chartData} dataKey="value" cx="50%" cy="50%" innerRadius={140} outerRadius={180} fill="#cc1c0c" label />
       </PieChart>
