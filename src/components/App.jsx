@@ -29,7 +29,7 @@ function App() {
           setUser(resObject.user);
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         });
     };
     getUser();

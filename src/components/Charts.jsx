@@ -1,10 +1,11 @@
 // import React, { PureComponent } from 'react';
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 import { useEffect, useState, CSSProperties } from "react";
+import '../charts.css';
 
 const Charts = ({ mappedReports }) => {
 
-  const [selectedChart, setSelectedChart] = useState('pie');
+  const [selectedChart, setSelectedChart] = useState('bar');
 
   let tally = {};
 
@@ -13,52 +14,52 @@ const Charts = ({ mappedReports }) => {
   mappedReports.forEach((ele) => {
     let incidentSplit = ele.incident_type.split(' ');
     incidentSplit.forEach(word => {
-      if(word === 'DOMESTIC'){
-        if(!tally.Domestic){
+      if (word === 'DOMESTIC') {
+        if (!tally.Domestic) {
           tally.Domestic = 1;
-        }else{
+        } else {
           tally.Domestic++
         }
       }
-      if(word === 'BURGLARY' || word === 'BURGLAR' || word === 'SHOPLIFTING' || word === 'THEFT' || word === 'ROBBERY' || word === 'STOLEN'){
-        if(!tally.Theft){
+      if (word === 'BURGLARY' || word === 'BURGLAR' || word === 'SHOPLIFTING' || word === 'THEFT' || word === 'ROBBERY' || word === 'STOLEN') {
+        if (!tally.Theft) {
           tally.Theft = 1;
-        }else{
+        } else {
           tally.Theft++
         }
       }
-      if(word === 'ABDUCTION' || word === 'FIGHT' || word === 'ASSAULT' || word === 'WEAPON' || word === 'MURDER' || word === 'SHOOTING' || word === 'SHOTS' || word === 'HOLDUP'){
-        if(!tally.Violent){
+      if (word === 'ABDUCTION' || word === 'FIGHT' || word === 'ASSAULT' || word === 'WEAPON' || word === 'MURDER' || word === 'SHOOTING' || word === 'SHOTS' || word === 'HOLDUP') {
+        if (!tally.Violent) {
           tally.Violent = 1;
-        }else{
+        } else {
           tally.Violent++
         }
       }
-      if(word === 'TRAFFIC' || word === 'MOTORIST' || word === 'VEHICLE' || word === 'ROADWAY' || word === 'DRIVING'){
-        if(!tally.Traffic){
+      if (word === 'TRAFFIC' || word === 'MOTORIST' || word === 'VEHICLE' || word === 'ROADWAY' || word === 'DRIVING') {
+        if (!tally.Traffic) {
           tally.Traffic = 1;
-        }else{
+        } else {
           tally.Traffic++
         }
       }
-      if(word === 'ACCIDENT'){
-        if(!tally.Accident){
+      if (word === 'ACCIDENT') {
+        if (!tally.Accident) {
           tally.Accident = 1;
-        }else{
+        } else {
           tally.Accident++
         }
       }
-      if(word === 'MEDICAL' || word === 'MEDIC' || word === 'DISTURBED' || word === 'MENTAL' || word === 'SUICIDE' || word === 'D.O.A./C.P.R'){
-        if(!tally.Medical){
+      if (word === 'MEDICAL' || word === 'MEDIC' || word === 'DISTURBED' || word === 'MENTAL' || word === 'SUICIDE' || word === 'D.O.A./C.P.R') {
+        if (!tally.Medical) {
           tally.Medical = 1;
-        }else{
+        } else {
           tally.Medical++
         }
       }
-      if(word === 'TRUANCY' || word === 'FIREWORKS' || word === 'PROTEST' || word === 'NOISE' || word === 'LOUD' || word === 'SUSPICIOUS' || word === 'DISORDERLY' || word === 'TRESPASSING' || word === 'THREATS/HARASSMENT'){
-        if(!tally.MinorOffense){
+      if (word === 'TRUANCY' || word === 'FIREWORKS' || word === 'PROTEST' || word === 'NOISE' || word === 'LOUD' || word === 'SUSPICIOUS' || word === 'DISORDERLY' || word === 'TRESPASSING' || word === 'THREATS/HARASSMENT') {
+        if (!tally.MinorOffense) {
           tally.MinorOffense = 1;
-        }else{
+        } else {
           tally.MinorOffense++
         }
       }
@@ -67,19 +68,19 @@ const Charts = ({ mappedReports }) => {
 
   for (let key in tally) {
     let type = '';
-    if(key === 'Domestic'){
+    if (key === 'Domestic') {
       type = 'Domestic Incident';
-    }else if(key === 'Theft'){
+    } else if (key === 'Theft') {
       type = 'Burglary/Theft';
-    }else if(key === 'Violent'){
+    } else if (key === 'Violent') {
       type = 'Violent Crime';
-    }else if(key === 'Traffic'){
+    } else if (key === 'Traffic') {
       type = 'Traffic Violation';
-    }else if(key === 'Accident'){
+    } else if (key === 'Accident') {
       type = 'Accident';
-    }else if(key === 'Medical'){
+    } else if (key === 'Medical') {
       type = 'Medical/Psychiatric Incident';
-    }else if (key === 'MinorOffense'){
+    } else if (key === 'MinorOffense') {
       type = 'Minor Offense';
     }
     chartData.push({
@@ -91,7 +92,7 @@ const Charts = ({ mappedReports }) => {
   let chosenColor = 'yellow';
 
   const calculateChartPercent = (val) => {
-    let percent = Math.trunc((val / (chartData.length - 1)) * 100);
+    let percent = Math.trunc((val / (mappedReports.length - 1)) * 100);
     return percent + '%';
   }
 
@@ -145,6 +146,7 @@ const Charts = ({ mappedReports }) => {
   );
 
   const renderRadarChart = (
+
     <ResponsiveContainer width="100%" height="50%">
       <RadarChart outerRadius={180} width={200} height={200} data={chartData}>
         <PolarGrid />
@@ -156,18 +158,20 @@ const Charts = ({ mappedReports }) => {
   );
 
   function onSelect(event) {
-    setSelectedChart(event.target.value);
+    setSelectedChart(event.target.getAttribute("value"));
   }
 
   function renderSelect() {
-    if (selectedChart === 'pie') {
-      return renderPieChart;
-    } else if (selectedChart === 'radar') {
-      return renderRadarChart;
-    } else if (selectedChart === 'bar') {
-      return renderBarChart;
-    } else {
-      return null;
+    if (mappedReports[0]) {
+      if (selectedChart === 'pie') {
+        return renderPieChart;
+      } else if (selectedChart === 'radar') {
+        return renderRadarChart;
+      } else if (selectedChart === 'bar') {
+        return renderBarChart;
+      } else {
+        return null;
+      }
     }
   }
 
@@ -175,11 +179,16 @@ const Charts = ({ mappedReports }) => {
   return (
     <div>
       <h1>CHARTS</h1>
-      <select name="charts" id="charts" onChange={onSelect}>
-        <option value="pie">Pie Chart</option>
-        <option value="radar">Radar Chart</option>
-        <option value="bar">Bar Graph</option>
-      </select>
+      <ul class="menu cf">
+        <li>
+          <a>Select Chart</a>
+          <ul class="charts" onClick={onSelect}>
+            <li><a value="bar">Bar Graph</a></li>
+            <li><a value="pie">Pie Chart</a></li>
+            <li><a value="radar">Radar Chart</a></li>
+          </ul>
+        </li>
+      </ul>
       {renderSelect()}
     </div>
   )
