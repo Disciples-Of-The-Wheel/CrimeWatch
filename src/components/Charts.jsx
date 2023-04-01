@@ -11,7 +11,6 @@ const Charts = ({ mappedReports }) => {
   let chartData = [];
 
   mappedReports.forEach((ele) => {
-    let misc = true;
     let incidentSplit = ele.incident_type.split(' ');
     incidentSplit.forEach(word => {
       if(word === 'DOMESTIC'){
@@ -20,31 +19,27 @@ const Charts = ({ mappedReports }) => {
         }else{
           tally.Domestic++
         }
-        misc = false;
       }
-      if(word === 'BURGLARY' || word === 'THEFT' || word === 'ROBBERY' || word === 'STOLEN'){
+      if(word === 'BURGLARY' || word === 'BURGLAR' || word === 'SHOPLIFTING' || word === 'THEFT' || word === 'ROBBERY' || word === 'STOLEN'){
         if(!tally.Theft){
           tally.Theft = 1;
         }else{
           tally.Theft++
         }
-        misc = false;
       }
-      if(word === 'ASSAULT' || word === 'WEAPON' || word === 'MURDER' || word === 'SHOOTING' || word === 'SHOTS'){
+      if(word === 'ABDUCTION' || word === 'FIGHT' || word === 'ASSAULT' || word === 'WEAPON' || word === 'MURDER' || word === 'SHOOTING' || word === 'SHOTS' || word === 'HOLDUP'){
         if(!tally.Violent){
           tally.Violent = 1;
         }else{
           tally.Violent++
         }
-        misc = false;
       }
-      if(word === 'TRAFFIC' || word === 'VEHICLE' || word === 'ROADWAY' || word === 'DRIVING'){
+      if(word === 'TRAFFIC' || word === 'MOTORIST' || word === 'VEHICLE' || word === 'ROADWAY' || word === 'DRIVING'){
         if(!tally.Traffic){
           tally.Traffic = 1;
         }else{
           tally.Traffic++
         }
-        misc = false;
       }
       if(word === 'ACCIDENT'){
         if(!tally.Accident){
@@ -52,21 +47,19 @@ const Charts = ({ mappedReports }) => {
         }else{
           tally.Accident++
         }
-        misc = false;
       }
-      if(word === 'MEDICAL' || word === 'MEDIC' || word === 'DISTURBED'){
+      if(word === 'MEDICAL' || word === 'MEDIC' || word === 'DISTURBED' || word === 'MENTAL' || word === 'SUICIDE' || word === 'D.O.A./C.P.R'){
         if(!tally.Medical){
           tally.Medical = 1;
         }else{
           tally.Medical++
         }
-        misc = false;
       }
-      if(misc === true){
-        if(!tally.Misc){
-          tally.Misc = 1;
+      if(word === 'TRUANCY' || word === 'FIREWORKS' || word === 'PROTEST' || word === 'NOISE' || word === 'LOUD' || word === 'SUSPICIOUS' || word === 'DISORDERLY' || word === 'TRESPASSING' || word === 'THREATS/HARASSMENT'){
+        if(!tally.MinorOffense){
+          tally.MinorOffense = 1;
         }else{
-          tally.Misc++
+          tally.MinorOffense++
         }
       }
     })
@@ -75,22 +68,22 @@ const Charts = ({ mappedReports }) => {
   for (let key in tally) {
     let type = '';
     if(key === 'Domestic'){
-      type = 'Domestic Issues';
+      type = 'Domestic Incident';
     }else if(key === 'Theft'){
       type = 'Burglary/Theft';
     }else if(key === 'Violent'){
       type = 'Violent Crime';
     }else if(key === 'Traffic'){
-      type = 'Traffic Incidents';
+      type = 'Traffic Violation';
     }else if(key === 'Accident'){
-      type = 'Accidents';
+      type = 'Accident';
     }else if(key === 'Medical'){
-      type = 'Medical/Psychiatric Incidents';
-    }else if (key === 'Misc'){
-      type = 'Miscellaneous Reports';
+      type = 'Medical/Psychiatric Incident';
+    }else if (key === 'MinorOffense'){
+      type = 'Minor Offense';
     }
     chartData.push({
-      name: key,
+      name: type,
       value: tally[key],
     })
   }
