@@ -9,7 +9,7 @@ mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibWdhbmRvbGZpIiwiYSI6ImNsZnUxcHFqNTAxeWczanF6anpldzV5bjUifQ.HJC-KdFh37GWmawwe0Sx1A';
 
-export default function Map({ reports, zipcode }) {
+export default function Map({ mappedReports, zipcode }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [lng, setLng] = useState(-90.0715);
@@ -29,17 +29,17 @@ export default function Map({ reports, zipcode }) {
   useEffect(() => {
     if (!map.current) return;
 
-    if (reports === []) {
+    if (mappedReports === []) {
       return;
     } else {
-      if (reports && reports.data) {
-        for (let i = 0; i < reports.data.length; i++) {
-          const type = reports.data[i].typetext;
+      console.log(mappedReports)
+      if (mappedReports) {
+        for (let i = 0; i < mappedReports.length; i++) {
+          const type = mappedReports[i].description;
           // const date = reports.data[i].timecreate;
-          const formattedTime = moment(reports.data[i].timecreate).format('lll');
-
+          const formattedTime = moment(mappedReports[i].time).format('lll');
           const marker = new mapboxgl.Marker()
-            .setLngLat([reports.data[i].location.coordinates[0], reports.data[i].location.coordinates[1]])
+            .setLngLat([mappedReports[i].long, mappedReports[i].lat])
             .addTo(map.current);
           let popup = new mapboxgl.Popup({
             closeButton: true,
@@ -49,7 +49,7 @@ export default function Map({ reports, zipcode }) {
             if (popup.isOpen()) {
               popup.remove();
             } else {
-              popup.setLngLat([reports.data[i].location.coordinates[0], reports.data[i].location.coordinates[1]])
+              popup.setLngLat([mappedReports[i].long, mappedReports[i].lat])
                 .setHTML(`<p>${type} <br> ${formattedTime} <br> ${zipcode}</p>`)
                 .addTo(map.current);
             }
@@ -57,7 +57,7 @@ export default function Map({ reports, zipcode }) {
         }
       }
     }
-  }, [reports]);
+  }, [mappedReports]);
 
 
   return (
