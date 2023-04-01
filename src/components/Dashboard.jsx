@@ -29,7 +29,8 @@ const Dashboard = () => {
             long: ele.location.coordinates[0], //location.coordinates[0]
             time: ele.timecreate, //timecreate
             zip: ele.zip, //zip
-            disposition: ele.dispositiontext, //initialtypetext
+            description: ele.initialtypetext, //initialtypetext
+            disposition: ele.dispositiontext,
             user_submitted: false
           };
         })
