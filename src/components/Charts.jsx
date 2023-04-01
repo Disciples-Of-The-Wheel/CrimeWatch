@@ -1,7 +1,7 @@
 // import React, { PureComponent } from 'react';
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 import { useEffect, useState, CSSProperties } from "react";
-import '../charts.css';
+import '../app.css';
 
 const Charts = ({ mappedReports }) => {
 
