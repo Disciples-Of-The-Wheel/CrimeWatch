@@ -77,6 +77,7 @@ const Form = () => {
     .then((response) => {
       console.log(response);
       alert('Incident report created successfully!');
+      setShowReportForm(false);
     })
     .catch((error) => {
       console.error(error);
