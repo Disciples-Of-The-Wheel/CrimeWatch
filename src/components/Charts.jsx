@@ -173,7 +173,6 @@ const Charts = ({ mappedReports }) => {
     }
   }
 
-
   return (
     <div>
       <h1>CHARTS</h1>

@@ -9,7 +9,7 @@ const Login = () => {
       <div className="wrapper">
         <div className="left">
           <div className="loginButton google" onClick={google}>
-            <img src="" alt="google" />
+            <div>Login with Google</div>
           </div>
         </div>
         <div className="right"></div>

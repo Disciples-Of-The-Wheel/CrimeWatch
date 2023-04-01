@@ -16,8 +16,13 @@ const Dashboard = () => {
 
   function getReports(event) {
     event.preventDefault();
-    axios.get(`https://data.nola.gov/resource/pc5d-tvaw.json?$where=TimeCreate between '2023-03-22T00:00:00' and '2023-03-23T23:59:59' and zip = '${zipcode}'`
-    )
+
+    const currentDate = new Date();
+    const twoDaysAgo = new Date(currentDate.getTime() - (48 * 60 * 60 * 1000));
+    const formattedStartDate = twoDaysAgo.toISOString().slice(0,19);
+    const formattedEndDate = currentDate.toISOString().slice(0,19);
+
+    axios.get(`https://data.nola.gov/resource/pc5d-tvaw.json?$where=TimeCreate between '${formattedStartDate}' and '${formattedEndDate}' and zip = '${zipcode}'`)
       .then((response) => {
         setReports(response)
         return response.data.map((ele) => {
@@ -64,7 +69,9 @@ const Dashboard = () => {
               newMappedReports.push(ele);
             });
             mappedDb.forEach((ele) => {
-              newMappedReports.push(ele);
+              if (ele.zip === zipcode) {
+                newMappedReports.push(ele);
+              }
             });
             return newMappedReports;
           })
@@ -87,18 +94,24 @@ const Dashboard = () => {
   return (
     <div className='container'>
       <div className='form'>
-        <h2>Enter Zipcode</h2>
-        <form>
-          <input type="text" onChange={updateZip} />
-          <input type="submit" onClick={getReports} />
+      <Form getReports={getReports} />
+
+        <form className="form__container">
+
+          <input className="form__input" type="text" placeholder="enter zipcode" onChange={updateZip} />
+          <input className="form__button" type="submit" onClick={getReports} value="Submit" />
         </form>
       </div>
-      <Map mappedReports={mappedReports} zipcode={zipcode} />
-      <Timeline reports={mappedReports} />
-      <Charts mappedReports={mappedReports} />
-      <Form getReports={getReports} />
+      <div className='content'>
+        <Map mappedReports={mappedReports} zipcode={zipcode} />
+        <hr></hr>
+        <Timeline reports={mappedReports} />
+        <hr></hr>
+        <Charts mappedReports={mappedReports} />
+        <hr></hr>
+      </div>
     </div>
-  )
+  );
 }
 
 export default Dashboard;
