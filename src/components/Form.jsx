@@ -77,7 +77,6 @@ const Form = () => {
     .then((response) => {
       console.log(response);
       alert('Incident report created successfully!');
-      setShowReportForm(false);
     })
     .catch((error) => {
       console.error(error);
@@ -88,7 +87,8 @@ const Form = () => {
 
   return (
     <div>
-      <button className="form__button__submit" onClick={handleOpenModal}>Create Incident Report</button>
+      <h1>FORM</h1>
+      <button onClick={handleOpenModal}>Create Incident Report</button>
       <Modal isOpen={isModalOpen}>
         <div>
           <h2>Have you contacted the authorities?</h2>
@@ -140,8 +140,8 @@ const Form = () => {
           Incident Description: {" "} <textarea name="incident_description" onChange={updateIncidentDescription}></textarea>
         </label>
         <div className="modal-buttons">
-        <button className="form__button submut"type="submit" onClick={postIncidentReports}>Submit</button>
-        <button className="form__button cancel"onClick={handleCloseModal}>Cancel</button>
+        <button className="s-button"type="submit" onClick={postIncidentReports}>Submit</button>
+        <button className="c-button"onClick={handleCloseModal}>Cancel</button>
         </div>
       </form>
       </Modal>
