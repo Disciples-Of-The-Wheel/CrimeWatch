@@ -60,7 +60,8 @@ const Form = () => {
     setIncidentDescription(event.target.value)
   }
 
-  function postIncidentReports() {
+  function postIncidentReports(event) {
+    event.preventDefault();
     axios.post('/api/reports', {
       "report": {
         name: name,
@@ -81,6 +82,7 @@ const Form = () => {
       console.error(error);
       alert('Error creating incident report');
     });
+   getReports();
   }
 
   return (

@@ -14,7 +14,6 @@ const Dashboard = () => {
   const [zipcode, setZipcode] = useState(null)
 
 
-
   function getReports(event) {
     event.preventDefault();
     axios.get(`https://data.nola.gov/resource/pc5d-tvaw.json?$where=TimeCreate between '2023-03-22T00:00:00' and '2023-03-23T23:59:59' and zip = '${zipcode}'`
@@ -93,10 +92,10 @@ const Dashboard = () => {
           <input type="submit" onClick={getReports} />
         </form>
       </div>
-      <Map reports={reports} zipcode={zipcode} />
+      <Map mappedReports={mappedReports} zipcode={zipcode} />
       <Timeline reports={reports} />
       <Charts mappedReports={mappedReports} />
-      <Form />
+      <Form getReports={getReports} />
     </div>
   )
 }
