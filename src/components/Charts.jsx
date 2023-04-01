@@ -4,24 +4,86 @@ import { useEffect, useState, CSSProperties } from "react";
 
 const Charts = ({ mappedReports }) => {
 
-  const [selectedChart, setSelectedChart] = useState('radar');
-
+  const [selectedChart, setSelectedChart] = useState('pie');
 
   let tally = {};
 
   let chartData = [];
 
   mappedReports.forEach((ele) => {
-    if (tally[ele.incident_type]) {
-      tally[ele.incident_type]++;
-    } else {
-      tally[ele.incident_type] = 1;
-    }
+    let incidentSplit = ele.incident_type.split(' ');
+    incidentSplit.forEach(word => {
+      if(word === 'DOMESTIC'){
+        if(!tally.Domestic){
+          tally.Domestic = 1;
+        }else{
+          tally.Domestic++
+        }
+      }
+      if(word === 'BURGLARY' || word === 'BURGLAR' || word === 'SHOPLIFTING' || word === 'THEFT' || word === 'ROBBERY' || word === 'STOLEN'){
+        if(!tally.Theft){
+          tally.Theft = 1;
+        }else{
+          tally.Theft++
+        }
+      }
+      if(word === 'ABDUCTION' || word === 'FIGHT' || word === 'ASSAULT' || word === 'WEAPON' || word === 'MURDER' || word === 'SHOOTING' || word === 'SHOTS' || word === 'HOLDUP'){
+        if(!tally.Violent){
+          tally.Violent = 1;
+        }else{
+          tally.Violent++
+        }
+      }
+      if(word === 'TRAFFIC' || word === 'MOTORIST' || word === 'VEHICLE' || word === 'ROADWAY' || word === 'DRIVING'){
+        if(!tally.Traffic){
+          tally.Traffic = 1;
+        }else{
+          tally.Traffic++
+        }
+      }
+      if(word === 'ACCIDENT'){
+        if(!tally.Accident){
+          tally.Accident = 1;
+        }else{
+          tally.Accident++
+        }
+      }
+      if(word === 'MEDICAL' || word === 'MEDIC' || word === 'DISTURBED' || word === 'MENTAL' || word === 'SUICIDE' || word === 'D.O.A./C.P.R'){
+        if(!tally.Medical){
+          tally.Medical = 1;
+        }else{
+          tally.Medical++
+        }
+      }
+      if(word === 'TRUANCY' || word === 'FIREWORKS' || word === 'PROTEST' || word === 'NOISE' || word === 'LOUD' || word === 'SUSPICIOUS' || word === 'DISORDERLY' || word === 'TRESPASSING' || word === 'THREATS/HARASSMENT'){
+        if(!tally.MinorOffense){
+          tally.MinorOffense = 1;
+        }else{
+          tally.MinorOffense++
+        }
+      }
+    })
   });
 
   for (let key in tally) {
+    let type = '';
+    if(key === 'Domestic'){
+      type = 'Domestic Incident';
+    }else if(key === 'Theft'){
+      type = 'Burglary/Theft';
+    }else if(key === 'Violent'){
+      type = 'Violent Crime';
+    }else if(key === 'Traffic'){
+      type = 'Traffic Violation';
+    }else if(key === 'Accident'){
+      type = 'Accident';
+    }else if(key === 'Medical'){
+      type = 'Medical/Psychiatric Incident';
+    }else if (key === 'MinorOffense'){
+      type = 'Minor Offense';
+    }
     chartData.push({
-      name: key,
+      name: type,
       value: tally[key],
     })
   }
@@ -44,7 +106,19 @@ const Charts = ({ mappedReports }) => {
         </div >
       );
     }
+    return null;
+  }
 
+  function BarChartTooltip({ payload, label, active }) {
+    if (active) {
+      return (
+        <div>
+          <p>{`Incident Type: ${payload[0].payload.name}`}</p>
+          <p>{`Number of Incidents: ${payload[0].value}`}</p>
+          <p>Percentage of Incidents: {calculateChartPercent(payload[0].value)}</p>
+        </div >
+      );
+    }
     return null;
   }
 
@@ -63,7 +137,7 @@ const Charts = ({ mappedReports }) => {
       <BarChart width={600} height={300} data={chartData}>
         <XAxis dataKey="name" stroke="#8884d8" />
         <YAxis />
-        <Tooltip content={<ChartTooltip />} />
+        <Tooltip content={<BarChartTooltip />} />
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
         <Bar dataKey="value" barSize={30} fill="#cc1c0c" />
       </BarChart>
@@ -102,8 +176,8 @@ const Charts = ({ mappedReports }) => {
     <div>
       <h1>CHARTS</h1>
       <select name="charts" id="charts" onChange={onSelect}>
-        <option value="radar">Radar Chart</option>
         <option value="pie">Pie Chart</option>
+        <option value="radar">Radar Chart</option>
         <option value="bar">Bar Graph</option>
       </select>
       {renderSelect()}
