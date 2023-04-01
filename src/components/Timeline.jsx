@@ -9,7 +9,7 @@ const Timeline = ({ reports }) => {
 
   return (
     <div className="timeline">
-      <h1>Incident Timeline</h1>
+      {/* <h1>Incident Timeline</h1> */}
       <div className="timeline-container">
         {sortedReports?.map((report) => {
           return <TimelineItem report={report}/>
@@ -20,5 +20,3 @@ const Timeline = ({ reports }) => {
 }
 
 export default Timeline;
-
-

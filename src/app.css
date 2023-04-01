@@ -1,12 +1,20 @@
 @import url(https://fonts.googleapis.com/css?family=Lato);
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+  margin: 0px;
+  font-family: 'Roboto';
+  text-align: center;
+}
 
 .navbar {
-  height: 50px;
-  background-color: blue;
-  color: White;
+  height: 60px;
+  background-color: #0000ff;
+  color: #ffffffff;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  font-size: 30px;
 }
 
 .list {
@@ -59,9 +67,55 @@
   text-decoration: none;
 }
 
-.form {
-  display: flex;
-  justify-content: center;
+/* .container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-gap: 20px;
+} */
+
+.form__container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 10px;
+  align-items: center;
+  width: 50%;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.form__button .submit {
+  margin-right: 100px;
+}
+
+.form__input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-bottom: 2px solid gray;
+}
+
+.form__button {
+  padding: 10px;
+  border: none;
+  background-color: blue;
+  color: #fff;
+  cursor: pointer;
+  font-size: 28px;
+}
+
+.form__button__submit {
+  padding: 10px;
+  border: none;
+  background-color: red;
+  color: #fff;
+  cursor: pointer;
+  font-size: 28px;
+  margin-top: 30px;
+}
+
+.submit {
+  margin-right: 10px;
 }
 
 input {
@@ -75,8 +129,14 @@ input {
 } */
 
 .map-container {
-  height: 400px;
+  height: 600px;
+  width: 90%;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
   }
+
+
    
 .sidebar {
   background-color: rgba(35, 55, 75, 0.9);
@@ -149,7 +209,7 @@ TIMELINE
 }
 
 .timeline-container {
-  background-color: beige;
+  background-color: white;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -160,7 +220,7 @@ TIMELINE
 }
 
 .timeline-container::after {
-  background-color: #32378d;
+  background-color: blue;
   content: '';
   position: absolute;
   left: calc(50% - 2px);
@@ -184,7 +244,7 @@ TIMELINE
 }
 
 .timeline-item-content {
-  background-color: rgb(131, 203, 207);
+  background-color:rgb(199, 191, 191);
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   display: flex;
@@ -199,7 +259,7 @@ TIMELINE
 
 .timeline-item-content::after {
   content: '';
-  background-color: rgb(131, 203, 207);
+  background-color: rgb(199, 191, 191);
   box-shadow: 1px -1px 1px rgba(0, 0, 0, 0.2);
   position: absolute;
   transform: rotate(45deg);
@@ -280,4 +340,10 @@ form td:last-child {
 
 form * {
   font-size: 28px;
+}
+
+.s-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
