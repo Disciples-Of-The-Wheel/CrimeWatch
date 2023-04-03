@@ -43,6 +43,7 @@ export default function Map({ mappedReports, zipcode }) {
         const type = mappedReports[i].description;
         const address = mappedReports[i].address;
         const formattedTime = moment(mappedReports[i].time).format('lll');
+        
         const marker = new mapboxgl.Marker({ color: 'blue'})
           .setLngLat([mappedReports[i].long, mappedReports[i].lat])
           .addTo(map.current);
