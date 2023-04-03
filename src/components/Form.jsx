@@ -77,23 +77,22 @@ const Form = () => {
     .then((response) => {
       console.log(response);
       alert('Incident report created successfully!');
+      setShowReportForm(false);
     })
     .catch((error) => {
       console.error(error);
       alert('Error creating incident report');
     });
-   getReports();
   }
 
   return (
     <div>
-      <h1>FORM</h1>
-      <button onClick={handleOpenModal}>Create Incident Report</button>
+      <button className="form__button__submit" onClick={handleOpenModal}>Create Incident Report</button>
       <Modal isOpen={isModalOpen}>
         <div>
           <h2>Have you contacted the authorities?</h2>
-          <button className="y-button"onClick={handleConfirmYes}>Yes</button>
-          <button className="n-button"onClick={handleConfirmNo}>No</button>
+          <button className="form__button"onClick={handleConfirmYes}>Yes</button>
+          <button className="form__button"onClick={handleConfirmNo}>No</button>
         </div>
         </Modal>
         {showReportForm && (
@@ -140,8 +139,8 @@ const Form = () => {
           Incident Description: {" "} <textarea name="incident_description" onChange={updateIncidentDescription}></textarea>
         </label>
         <div className="modal-buttons">
-        <button className="s-button"type="submit" onClick={postIncidentReports}>Submit</button>
-        <button className="c-button"onClick={handleCloseModal}>Cancel</button>
+        <button className="form__button"type="submit" onClick={postIncidentReports}>Submit</button>
+        <button className="form__button"onClick={handleCloseModal}>Cancel</button>
         </div>
       </form>
       </Modal>

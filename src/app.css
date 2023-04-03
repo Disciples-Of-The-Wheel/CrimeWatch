@@ -102,6 +102,8 @@ body {
   color: #fff;
   cursor: pointer;
   font-size: 28px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .form__button__submit {
