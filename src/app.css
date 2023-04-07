@@ -483,3 +483,9 @@ form * {
 .menu > li:hover .charts li:nth-child(odd){
 	transform: skewX(-25deg) translateX(-15px);			
 }
+
+@media only screen and (max-width: 600px) {
+  .form__container {
+    width: 90%;
+  }
+}
