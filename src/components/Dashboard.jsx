@@ -14,7 +14,7 @@ const Dashboard = () => {
   const [zipcode, setZipcode] = useState(null)
 
 
-  function getReports(event) {
+  function getReports(event) { //this function gets all reports from both the database and the NOPD API and parses them into a single standardized object to make accessing the data easier
     event.preventDefault();
 
     const currentDate = new Date();
@@ -22,7 +22,7 @@ const Dashboard = () => {
     const formattedStartDate = twoDaysAgo.toISOString().slice(0,19);
     const formattedEndDate = currentDate.toISOString().slice(0,19);
 
-    axios.get(`https://data.nola.gov/resource/pc5d-tvaw.json?$where=TimeCreate between '${formattedStartDate}' and '${formattedEndDate}' and zip = '${zipcode}'`)
+    axios.get(`https://data.nola.gov/resource/pc5d-tvaw.json?$where=TimeCreate between '${formattedStartDate}' and '${formattedEndDate}' and zip = '${zipcode}'`) //gets data from NOPD API with inputted zip code that's within date range
       .then((response) => {
         setReports(response)
         return response.data.map((ele) => {
@@ -42,7 +42,7 @@ const Dashboard = () => {
       .then((mapped) => {
         axios.get('/api/reports/')
           .then((dbReports) => {
-            let promises = dbReports.data.map((ele) => {
+            let promises = dbReports.data.map((ele) => { //gets data from database code that's within date range
               return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=' + ${ele.address} + ' ' + ${ele.city} + ' ' + ${ele.state} ' ' + ${ele.zipcode} + '&key=AIzaSyDNNEUdVHdTmB5zCTXDV_Y4p9dPMZl00rk`)
                 .then((res) => {
                   let outpObj = {
@@ -63,7 +63,7 @@ const Dashboard = () => {
             });
             return Promise.all(promises);
           })
-          .then((mappedDb) => {
+          .then((mappedDb) => { //this part combines the data from the db and the data from NOPD API into one array
             let newMappedReports = [];
             mapped.forEach((ele) => {
               newMappedReports.push(ele);
@@ -76,7 +76,7 @@ const Dashboard = () => {
             return newMappedReports;
           })
           .then((newState) => {
-            setMappedReports(newState);
+            setMappedReports(newState); //sets state with the array created above (see comment on line 66)
           })
           .catch((err) => {
             console.error(err);
