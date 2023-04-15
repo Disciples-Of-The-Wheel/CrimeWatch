@@ -1,7 +1,9 @@
 # CrimeWatch
 README 
-- What the ***APP*** is - The app is a CrimeWatch app that is used to view recent and solved incidents in NOLA.
-- Project features:
+Elevator Pitch:
+    CrimeWatch is an app that displays recent incidents from an inputted zip code in NOLA along with breakdowns of report statistics for those areas.
+
+Project features:
     - The user can submit an incident report that will be added to our database.
     - The zip code submission box at the top will retrieve all incidents from the zip code entered into it that occurred within the last 48 hours from both the NOPD API and our database of user reported incidents when the “Submit” button is clicked.
     - A dynamic city map will display incidents from the zip code submitted by the user.
@@ -34,3 +36,11 @@ README
         - Incidents on the map are marked with colored pins. Clicking these pins will display information relevant to the event.
     - You can hover over the ‘select chart’ element to see a list of available chart types that the data can be displayed in. Click one of the entries to switch to that chart.
         - Note: hovering over bars on the bar chart or pie slices on the pie chart will display additional relevant data related to the incident type represented in that area.
+
+Use instructions:
+    After starting the app (see above), open the app page and sign on via Google Auth
+    Input a zipcode to display data from that zipcode (note: you MUST input a zipcode, no data will display without one!)
+    Click pins on map to display relevant data
+    Scroll through timeline of events sorted by recency
+    Hover over dropdown menu in Charts and click chart type to display that chart/graph for the relevant data
+    Click the 'Create Incident Report' button to bring up an incident submission form. Fill this form out and click 'submit' to submit a report
