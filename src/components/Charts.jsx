@@ -11,7 +11,7 @@ const Charts = ({ mappedReports }) => {
 
   let chartData = [];
 
-  mappedReports.forEach((ele) => {
+  mappedReports.forEach((ele) => { //sorts the reports passed down from Dashboard into common categories to generate a tally (stored in object 'tally') of those categories to display on graphs/charts
     let incidentSplit = ele.incident_type.split(' ');
     incidentSplit.forEach(word => {
       if (word === 'DOMESTIC') {
@@ -66,7 +66,7 @@ const Charts = ({ mappedReports }) => {
     })
   });
 
-  for (let key in tally) {
+  for (let key in tally) { //creates an array of objects containing 'name: <object category>' and 'value: <# of reports in this category>' key-value pairs for easy reference; this array is chartData
     let type = '';
     if (key === 'Domestic') {
       type = 'Domestic Incident';
@@ -89,11 +89,12 @@ const Charts = ({ mappedReports }) => {
     })
   }
 
-  const calculateChartPercent = (val) => {
+  const calculateChartPercent = (val) => { //calculates the % of incidents of a particular category compared to all incidents in that category (note: since some incidents can be counted for more than one categories, these %'s are somewhat inaccurate)
     let percent = Math.trunc((val / (mappedReports.length - 1)) * 100);
     return percent + '%';
   }
 
+ //NOTE: Please look up the ReCharts docs for info on how to code these charts and chart-related functions, like the tooltips. It's easier to use than it looks!
 
   function ChartTooltip({ payload, label, active }) {
     if (active) {
